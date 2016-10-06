@@ -1,7 +1,7 @@
 <?php
   $fruit = "ananas";
-  $fruita = strpos($fruit, "a");
-
+  $fruita = strpos($fruit,strrchr($fruit, "a"));
+  $fruit = strtoupper($fruit);
 ?>
 
 <!DOCTYPE html>
@@ -11,6 +11,7 @@
     <title>Opdracht Ananas</title>
   </head>
   <body>
-
+    <h2><?= $fruita ?></h2>
+    <h1><?= $fruit ?></h1>
   </body>
 </html>
