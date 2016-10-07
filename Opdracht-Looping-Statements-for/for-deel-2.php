@@ -15,8 +15,8 @@ $kolommen = 10;
     <table class="table table-bordered">
       <?php for ($i=0; $i <= $rijen; $i++) { ?>
         <tr>
-          <?php for ($j=0; $j <= $kolommen; $j++) { ?>
-            <td>
+          <?php for ($j=0; $j <= $kolommen; $j++) {
+            (($i*$j)%2 === 0) ? echo '<td class = "succes">'; : echo '<td>'; ?>
               <?php echo $i*$j; ?>
             </td>
           <?php } ?>
