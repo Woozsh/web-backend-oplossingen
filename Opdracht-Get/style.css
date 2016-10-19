@@ -16,6 +16,7 @@ h1, h2{
 .articles{
   display: flex;
   justify-content: space-around;
+  margin: 5px;
 }
 article{
   box-shadow: 1px 1px 5px black;
@@ -26,4 +27,5 @@ article{
 }
 a{
   text-align: center !important;
+  display: block;
 }
