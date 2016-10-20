@@ -1,0 +1,46 @@
+body{
+  margin: 10px 25px;
+}
+ul{
+  list-style-type: hebrew;
+}
+h2{
+  border-bottom: 1px solid #ddd;
+}
+a{
+  color: orangered;
+  -webkit-transition:500ms;
+  -o-transition:500ms;
+  transition:500ms;
+}
+a:hover{
+  text-decoration: none;
+  color: darkgreen;
+}
+.inhoud{
+  min-width: 300px;
+  min-height: 230px;
+}
+h2 > a {
+  color: black;
+}
+h2 > a:hover{
+  color: black;
+}
+.voorbeelden{
+  list-style-type: square;
+}
+iframe{
+  border: 5px solid #ddd;
+  width: 1000px;
+    height: 750px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.voorbeelden > li > a{
+  color: black;
+}
+.voorbeelden > li > a:hover{
+  color: darkred;
+}

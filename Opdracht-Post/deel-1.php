@@ -1,7 +1,10 @@
+
 <?php
   $password = "admin";
   $username = "admin";
   $msg = "";
+
+  var_dump($_POST);
   if(isset($_POST['send'])){
     if($_POST['username'] == $username && $_POST['password'] == $password){
       $msg = "Gelukt. U bent ingelogd.";
@@ -29,7 +32,7 @@
           <label for="password">Password:</label>
           <input type="password" id="username" name="password">
         </div>
-        <input type="button" id="send" name="send" value="Send">
+        <input type="submit" id="send" name="send" value="Send">
       </form>
       <p>
         <?= $msg ?>

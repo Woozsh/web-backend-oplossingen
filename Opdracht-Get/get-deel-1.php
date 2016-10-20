@@ -9,7 +9,19 @@ $artikel3 = array("titel" => "Canonical releases Ubuntu 16.10
 
 $artikels = array($artikel1, $artikel2, $artikel3);
 
+$individueelArtikel = false;
 
+
+if (isset($_GET['id'])) {
+
+  $id = $_GET['id'];
+
+  if ( isset( $artikels[$id] )) {
+    $individueelArtikel = true;
+
+  }
+
+}
  ?>
 
  <!DOCTYPE html>
@@ -25,7 +37,7 @@ $artikels = array($artikel1, $artikel2, $artikel3);
    <body>
      <h1 >Kranten Artikels</h1>
      <div class="articles">
-       <?php   if(isset($_GET['id'])){ ?>
+       <?php if( $individueelArtikel ): ?>
          <article class="box" >
            <h2><?= ucfirst(strtolower($artikels[$_GET['id']]["titel"])) ?></h2>
            <img class="img-responsive img-thumbnail" src=<?= $artikels[$_GET['id']]["afbeelding"] ?> alt=<?= $artikels[$_GET['id']]["beschrijving"] ?> />
@@ -34,7 +46,8 @@ $artikels = array($artikel1, $artikel2, $artikel3);
            </p>
            <a href="get-deel-1.php">Ga Terug!!!!</a>
          </article>
-       <?php }else {foreach ($artikels as $key => $artikel): ?>
+       <?php else: ?>
+       <?php foreach ($artikels as $key => $artikel): ?>
        <article class="box" id=<?= $key ?>>
          <h2><?= ucfirst(strtolower($artikel["titel"])) ?></h2>
          <img class="img-responsive img-thumbnail" src=<?= $artikel["afbeelding"] ?> alt=<?= $artikel["beschrijving"] ?> />
@@ -43,7 +56,7 @@ $artikels = array($artikel1, $artikel2, $artikel3);
          </p>
          <a href="get-deel-1.php?id=<?= $key ?>">Lees meer!!!!</a>
        </article>
-     <?php endforeach;} ?>
+     <?php endforeach; endif; ?>
      </div>
 
    </body>
