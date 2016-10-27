@@ -15,7 +15,7 @@
         <input type="email" name="mail" id="mail" required>
         <label for="nickname">Nickname</label>
         <input type="text" name="nickname" id="nickname" required>
-        <input type="submit" name="name" class="button" value="Volgende">
+        <input type="submit" name="volgende" class="button" value="Volgende">
       </div>
 
     </form>

@@ -1,4 +1,5 @@
 <?php
+session_start();
   $_SESSION['straat'] = $_POST['straat'];
   $_SESSION['nummer'] = $_POST['nummer'];
   $_SESSION['gemeente'] = $_POST['gemeente'];
@@ -25,9 +26,9 @@
 
     </ul>
 
-    <form action="<?php session_destroy();?>" method="post">
+    <!-- <form action="<?php session_destroy();?>" method="post">
       <button type="button" name="button" class="button alert">Destroy Session!</button>
 
-    </form>
+    </form> -->
   </body>
 </html>

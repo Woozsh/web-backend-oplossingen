@@ -1,4 +1,5 @@
 <?php
+  session_start();
   $_SESSION['mail'] = $_POST['mail'];
   $_SESSION['nickname'] = $_POST['nickname'];
 
@@ -33,9 +34,9 @@
       </div>
 
     </form>
-    <form action="<?php session_destroy();?>" method="post">
+    <!-- <form action="<?php session_destroy();?>" method="post">
       <button type="button" name="button" class="button alert">Destroy Session!</button>
 
-    </form>
+    </form> -->
   </body>
 </html>
