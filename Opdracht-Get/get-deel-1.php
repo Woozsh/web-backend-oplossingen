@@ -35,7 +35,7 @@ if (isset($_GET['id'])) {
      </title>
    </head>
    <body>
-     <h1 >Kranten Artikels</h1>
+     <h1>Kranten Artikels</h1>
      <div class="articles">
        <?php if( $individueelArtikel ): ?>
          <article class="box" >
