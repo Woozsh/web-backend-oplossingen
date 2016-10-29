@@ -23,6 +23,6 @@ Dit vond ik echter nog steeds saai en oninteressant. Ik heb lang nagedacht maar 
 Het eerste jaar interesseerde websites me totaal niet. Ik was zelfs zwaar gebuisd op Web Standards. Maar nadat je je eigen website moest maken, en er echt veel tijd in gestoken te hebben, heb ik de smaak te pakken. Vanaf toen ben ik razendsnel vooruit gegaan en heb echt alels zelf uitgezocht. Nu ben ik praktisch elke dag met websites en alles erond bezig .
  
 ##Feedback voor de cursus web backend
-`sterk:` Ons al laten werken met github is zeker al een sterk punt 
+*sterk:* Ons al laten werken met github is zeker al een sterk punt 
 
-`mogelijke verbetering:` De voorbeelden zijn soms wat moeilijk te bekijken, bv. Als het een kleine voorbeeld is misschien gewoon de code in de cursus zetten. Voor de rest heb ik niet echt opmerkingen.
+**mogelijke verbetering:** De voorbeelden zijn soms wat moeilijk te bekijken, bv. Als het een kleine voorbeeld is misschien gewoon de code in de cursus zetten. Voor de rest heb ik niet echt opmerkingen.
