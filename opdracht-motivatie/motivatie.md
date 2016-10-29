@@ -18,9 +18,14 @@ Neem deze tekst over in je eigen document en schrijf onder deze tekst wat hierbo
 
 ##Waarom ik voor MT koos
 Ik ben altijd al met Informatica bezig geweest. Zo ben ik in het middelbaar bij Informatica-Beheer terecht gekomen in Hasselt. Daar was ik jammer genoeg nog steeds niet zo geïnteresseerd in web. 
+
 Daarna heb ik de logische opvolging gedaan, namelijk naar de PXL Hasselt om Toegepaste Informatica te studeren. 
+
 Dit vond ik echter nog steeds saai en oninteressant. Ik heb lang nagedacht maar ik wou iets doen dat ook creatief was. Na lang zoeken ben ik op Multimedia Technology in Antwerpen terecht gekomen, het creatieve gepaard met Informatica. 
-Het eerste jaar interesseerde websites me totaal niet. Ik was zelfs zwaar gebuisd op Web Standards. Maar nadat je je eigen website moest maken, en er echt veel tijd in gestoken te hebben, heb ik de smaak te pakken. Vanaf toen ben ik razendsnel vooruit gegaan en heb echt alels zelf uitgezocht. Nu ben ik praktisch elke dag met websites en alles erond bezig .
+
+Het eerste jaar interesseerde websites me totaal niet. Ik was zelfs zwaar gebuisd op Web Standards. Maar nadat je je eigen website moest maken, en er echt veel tijd in gestoken te hebben, heb ik de smaak te pakken. 
+
+Vanaf toen ben ik razendsnel vooruit gegaan en heb echt alels zelf uitgezocht. Nu ben ik praktisch elke dag met websites en alles erond bezig .
  
 ##Feedback voor de cursus web backend
 *sterk:* Ons al laten werken met github is zeker al een sterk punt 
