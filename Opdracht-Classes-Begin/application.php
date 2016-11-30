@@ -1,5 +1,7 @@
 <?php
-require_once 'classes/Percent.php';
+function __autoload($class){
+  include 'classes/' . $class . '.php';
+}
 $new = 150;
 $unit = 100;
 $percent = new Percent($new, $unit);
