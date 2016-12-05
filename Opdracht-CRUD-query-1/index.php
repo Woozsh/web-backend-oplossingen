@@ -50,18 +50,19 @@ try {
       </thead>
       <?php $i = 1;foreach($fetchAssoc as $row): ?>
         <tbody>
-          <td><?= $i ?></td>
-          <td><?= $row['biernr'] ?></td>
-          <td><?= $row['naam'] ?></td>
-          <td><?= $row['brouwernr'] ?></td>
-          <td><?= $row['soortnr'] ?></td>
-          <td><?= $row['alcohol'] ?></td>
-          <td><?= $row['brnaam'] ?></td>
-          <td><?= $row['adres'] ?></td>
-          <td><?= $row['postcode'] ?></td>
-          <td><?= $row['gemeente'] ?></td>
-          <td><?= $row['omzet'] ?></td>
-
+          <tr>
+            <td><?= $i ?></td>
+            <td><?= $row['biernr'] ?></td>
+            <td><?= $row['naam'] ?></td>
+            <td><?= $row['brouwernr'] ?></td>
+            <td><?= $row['soortnr'] ?></td>
+            <td><?= $row['alcohol'] ?></td>
+            <td><?= $row['brnaam'] ?></td>
+            <td><?= $row['adres'] ?></td>
+            <td><?= $row['postcode'] ?></td>
+            <td><?= $row['gemeente'] ?></td>
+            <td><?= $row['omzet'] ?></td>
+          </tr>
         </tbody>
       <?php $i++;endforeach; ?>
     </table>
