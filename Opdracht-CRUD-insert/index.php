@@ -2,7 +2,7 @@
 $messageContainer = '';
 if(isset($_POST['submit'])){
   try {
-    $db = new PDO('mysql:host=localhost;dbname=bieren', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+    $db = new PDO('mysql:host=localhost;dbname=bieren', 'root', '');
 
     $brnaam = $_POST['brnaam'];
     $adres = $_POST['adres'];
@@ -10,7 +10,7 @@ if(isset($_POST['submit'])){
     $gemeente = $_POST['gemeente'];
     $omzet = $_POST['omzet'];
 
-    $queryString = "INSERT INTO brouwers (brnaam, adres, postcode, gemeente, omzet) VALUES :brnaam, :adres, :postcode, :gemeente, :omzet ";
+    $queryString = 'INSERT INTO brouwers (brnaam, adres, postcode, gemeente, omzet) VALUES :brnaam, :adres, :postcode, :gemeente, :omzet ';
 
     $statement = $db->prepare($queryString);
 
