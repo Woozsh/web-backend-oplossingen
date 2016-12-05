@@ -21,7 +21,8 @@ if(isset($_POST['submit'])){
     $statement->bindValue(':omzet', $omzet);
 
     $statement->execute();
-
+    $lastID = $db->lastInsertID();
+    $messageContainer = "Gelukt! " . $lastID;
   } catch (PDOException $e) {
       $messageContainer = 'Something went wrong: ' . $e->getMessage();
   }
