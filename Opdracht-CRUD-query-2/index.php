@@ -22,8 +22,6 @@ try {
 }
 if(isset($_GET['send'])){
   try {
-    $db = new PDO('mysql:host=localhost;dbname=bieren', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-
     $biermerk = $_GET['biermerk'];
 
     $queryString = "SELECT naam FROM bieren WHERE brouwernr = :biermerk";

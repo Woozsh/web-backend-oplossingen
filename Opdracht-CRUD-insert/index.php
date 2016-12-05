@@ -10,7 +10,7 @@ if(isset($_POST['submit'])){
     $gemeente = $_POST['gemeente'];
     $omzet = $_POST['omzet'];
 
-    $queryString = "INSERT INTO brouwers (brnaam, adres, postcode, gemeente, omzet) VALUES(:brnaam, :adres, :postcode, :gemeente, :omzet) ";
+    $queryString = "INSERT INTO brouwers (brnaam, adres, postcode, gemeente, omzet) VALUES :brnaam, :adres, :postcode, :gemeente, :omzet ";
 
     $statement = $db->prepare($queryString);
 
