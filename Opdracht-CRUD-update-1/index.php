@@ -2,7 +2,7 @@
 $messageContainer = '';
 $messageDelete = '';
 try {
-  $db = new PDO('mysql:host=localhost;dbname=bieren', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+  $db = new PDO('mysql:host=localhost;dbname=bieren', 'root', '');
 
   $queryString = "SELECT * FROM brouwers";
 
@@ -50,7 +50,26 @@ try {
 } catch (PDOException $e) {
   $messageContainer = 'Er ging iets mis: ' . $e->getMessage();
 }
+function query($db, $query, $tokens = false){
+  $statement = $db->prepare($query);
 
+  if($tokens){ //assign variables as $var[':var'] = $var
+    foreach($tokens as $token => $tokenValue){
+      $statement->bindValue($token, $tokenValue);
+    }
+  }
+
+  $statement->execute();
+
+  //Veldnamen
+  $fieldNames = array();
+
+  for($i = 0; $i < $statement->columnCount(); ++$i){
+    $fieldnames[] = $statement->getColumnMeta($i)['name'];
+  }
+
+
+}
 if(isset($_GET['delete']))
 {
   try {
@@ -104,15 +123,15 @@ if(isset($_GET['delete']))
 
     <table>
       <thead>
-        <td>#</td>
-        <td>brouwernr</td>
-        <td>brnaam</td>
-        <td>adres</td>
-        <td>postcode</td>
-        <td>gemeente</td>
-        <td>omzet</td>
-        <td></td>
-        <td></td>
+        <th>#</th>
+        <th>brouwernr</th>
+        <th>brnaam</th>
+        <th>adres</th>
+        <th>postcode</th>
+        <th>gemeente</th>
+        <th>omzet</th>
+        <th></th>
+        <th></th>
       </thead>
       <tbody>
         <?php $i=1;foreach($brouwersArray as $row): ?>
