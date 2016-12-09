@@ -1,4 +1,6 @@
 <?php
+
+session_start();
 $messageContainer = '';
 $messageDelete = '';
 try {
@@ -6,22 +8,21 @@ try {
 
   $queryString = "SELECT * FROM brouwers";
 
-  $statement = $db->prepare($queryString);
-  $statement->execute();
+  //display brouwers data via functie
+  $brouwersQuery = query($db, $queryString); //db link + query + (opt.) VARS
+  $brouwersFieldnames = $brouwersQuery['fieldnames'];
+  $brouwers = $brouwersQuery['data'];
 
-  $brouwersArray = array();
 
-  while( $row = $statement->fetch(PDO::FETCH_ASSOC)){
-    $brouwersArray[] = $row;
-  }
-
-  if(isset($_GET['edit'])){
+  if(isset($_POST['edit'])){
 
     $queryEdit = "SELECT * FROM brouwers WHERE brouwernr = :brouwersid";
 
     $statementEdit = $db->prepare($queryEdit);
 
-    $statementEdit->bindValue(':brouwersid', $_GET['edit']);
+    $_SESSION['editnr'] = $_POST['edit'];
+
+    $statementEdit->bindValue(':brouwersid', $_SESSION['editnr']);
 
     $statementEdit->execute();
 
@@ -42,14 +43,19 @@ try {
     $statementWijzigen->bindValue(":omzet", $_POST['omzet']);
     $statementWijzigen->bindValue(":brouwernr", $_POST['brouwernr']);
 
-    $statementWijzigen->execute();
+    $wijzigenSucces = $statementWijzigen->execute();
 
-    $messageContainer = "Gelukt, met succes gewijzigd";
+    if($wijzigenSucces)
+    {
+      $messageContainer = "Gelukt, brouwer nr " . $_SESSION['editnr'] . " met succes gewijzigd";
+    }
   }
 
 } catch (PDOException $e) {
   $messageContainer = 'Er ging iets mis: ' . $e->getMessage();
 }
+
+//OUR FUNCTION TO EXECUTE A QUERY
 function query($db, $query, $tokens = false){
   $statement = $db->prepare($query);
 
@@ -64,16 +70,26 @@ function query($db, $query, $tokens = false){
   //Veldnamen
   $fieldNames = array();
 
-  for($i = 0; $i < $statement->columnCount(); ++$i){
-    $fieldnames[] = $statement->getColumnMeta($i)['name'];
+  for($i = 0; $i < $statement->columnCount(); ++$i){ //overloopt alle kolommen
+    $fieldnames[] = $statement->getColumnMeta($i)['name']; //slaat de headername van de kolom op
   }
 
+  //De data ophalen
+  while($row = $statement->fetch(PDO::FETCH_ASSOC))
+  {
+    $data[] = $row;
+  }
+
+  $returnarray['fieldnames'] = $fieldnames;
+  $returnarray['data'] = $data;
+
+  return $returnarray;
 
 }
-if(isset($_GET['delete']))
+if(isset($_POST['delete']))
 {
   try {
-    $brouwernr = $_GET['delete'];
+    $brouwernr = $_POST['delete'];
 
     $queryString = "DELETE FROM brouwers WHERE brouwers.brouwernr = :brouwernr";
 
@@ -81,9 +97,14 @@ if(isset($_GET['delete']))
 
     $statement->bindValue(':brouwernr', $brouwernr);
 
-    $statement->execute();
+    $isDeleted = $statement->execute();
 
-    $messageDelete = "Gelukt. De datarij is verwijderd.";
+    if($isDeleted){
+      $messageDelete = "Gelukt. De datarij is verwijderd.";
+    }else{
+      $messageDelete = "De datarij kon niet verwijderd worden. Reden: " . $statement->errorInfo()[2];
+    }
+
   } catch (PDOException $e) {
     $messageDelete = "De datarij kon niet verwijderd worden. Probeer opnieuw: " . $e->getMessage();
   }
@@ -101,19 +122,13 @@ if(isset($_GET['delete']))
      <title>Delete</title>
    </head>
    <body>
-    <?php if(isset($_GET['edit'])): ?>
-      <h1>Brouwerij <?= $brouwersArray[0]['brnaam'] ?> ( #<?= $_GET['edit'] ?> ) wijzigen</h1>
+    <?php if(isset($_POST['edit'])): ?>
+      <h1>Brouwerij <?= $editArray[0]['brnaam'] ?> ( #<?= $_POST['edit'] ?> ) wijzigen</h1>
       <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
-        <label for="brnaam">Brouwernaam</label>
-        <input type="text" name="brnaam" value="<?= $brouwersArray[0]['brnaam'] ?>">
-        <label for="adres">adres</label>
-        <input type="text" name="adres" value="<?= $brouwersArray[0]['adres'] ?>">
-        <label for="postcode">postcode</label>
-        <input type="text" name="postcode" value="<?= $brouwersArray[0]['postcode'] ?>">
-        <label for="gemeente">gemeente</label>
-        <input type="text" name="gemeente" value="<?= $brouwersArray[0]['gemeente'] ?>">
-        <label for="omzet">omzet</label>
-        <input type="text" name="omzet" value="<?= $brouwersArray[0]['omzet'] ?>">
+        <?php foreach($editArray[0] as $edit => $value): ?>
+          <label for="<?= $edit ?>"><?= $edit ?></label>
+          <input type="text" name="<?= $edit ?>" value="<?= $value ?>">
+        <?php endforeach ?>
         <input type="submit" class="button" name="wijzigen" value="Verzenden">
       </form>
     <?php endif; ?>
@@ -121,37 +136,36 @@ if(isset($_GET['delete']))
     <p><?= $messageContainer ?></p>
     <p><?= $messageDelete ?></p>
 
-    <table>
-      <thead>
-        <th>#</th>
-        <th>brouwernr</th>
-        <th>brnaam</th>
-        <th>adres</th>
-        <th>postcode</th>
-        <th>gemeente</th>
-        <th>omzet</th>
-        <th></th>
-        <th></th>
-      </thead>
-      <tbody>
-        <?php $i=1;foreach($brouwersArray as $row): ?>
+    <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
+      <table>
+
+        <thead>
           <tr>
-            <td><?= $i ?></td>
-            <td><?= $row['brouwernr'] ?></td>
-            <td><?= $row['brnaam'] ?></td>
-            <td><?= $row['adres'] ?></td>
-            <td><?= $row['postcode'] ?></td>
-            <td><?= $row['gemeente'] ?></td>
-            <td><?= $row['omzet'] ?></td>
-            <td><form method="get">
-              <button type="submit" name="delete" value="<?= $row['brouwernr'] ?>"><img src="img/icon-delete.png" alt="delete-icon"></button>
-            </form></td>
-            <td><form method="get">
-              <button type="submit" name="edit" value="<?= $row['brouwernr'] ?>"><img src="img/edit.png" alt="edit-icon" height="16px" width="16px"></button>
-            </form></td>
+            <?php foreach($brouwersFieldnames as $headerRow): ?>
+              <th><?= $headerRow ?></th>
+            <?php endforeach; ?>
+            <th></th>
+            <th></th>
           </tr>
-        <?php $i++;endforeach; ?>
-      </tbody>
-    </table>
+        </thead>
+
+        <tbody>
+          <?php foreach($brouwers as $brouwer): ?>
+            <tr>
+              <?php foreach($brouwer as $row): ?>
+                <td><?= $row ?></td>
+              <?php endforeach ?>
+              <td>
+                <button type="submit" name="delete" value="<?= $brouwer['brouwernr'] ?>"><img src="img/icon-delete.png" alt="delete-icon"></button>
+              </td>
+              <td>
+                <button type="submit" name="edit" value="<?= $brouwer['brouwernr'] ?>"><img src="img/edit.png" alt="edit-icon" height="16px" width="16px"></button>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+    </form>
+
    </body>
  </html>
