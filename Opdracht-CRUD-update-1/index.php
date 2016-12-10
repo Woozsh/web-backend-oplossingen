@@ -48,6 +48,8 @@ try {
     if($wijzigenSucces)
     {
       $messageContainer = "Gelukt, brouwer nr " . $_SESSION['editnr'] . " met succes gewijzigd";
+    }else{
+      $messageContainer = "Aanpassing is niet gelukt. Probeer opnieuw of neem contact op met de <a href="mailto:systeembeheerder@brouwer.be">systeembeheerder</a> wanneer deze fout blijft aanhouden."
     }
   }
 
