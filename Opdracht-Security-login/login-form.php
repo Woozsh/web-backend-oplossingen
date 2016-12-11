@@ -1,14 +1,8 @@
 <?php
 session_start();
-$email = '';
-$paswoord = '';
 $message = '';
 $messageType = '';
-
-if(isset($_SESSION['generate'])){
-  $email = $_SESSION['generate']['email'];
-  $paswoord = $_SESSION['generate']['password'];
-}
+$registrationFormName = 'registratie-form.php';
 
 var_dump( $_SESSION);
 
@@ -31,34 +25,32 @@ switch($messageType){
     <meta charset="utf-8">
     <link rel="stylesheet" href="../foundation.min.css">
     <link rel="stylesheet" href="css/master.css">
-    <title>Registreren</title>
+    <title>Inloggen</title>
   </head>
   <body>
-    <h1 class="text-center">Registreren</h1>
+    <p><?=  $_SESSION['check'] ?></p>
+    <h1 class="text-center">Inloggen</h1>
     <div class="<?= ($messageType) ? 'callout' : '' ?> <?= $messageType ?>">
       <p class="text-center "><?= $message ?></p>
     </div>
-    <form action="registratie-process.php" method="post">
+    <form action="login-process.php" method="post">
         <!-- EMAIL -->
       <div class="row medium-6 columns">
         <label for="email">e-mail</label>
-        <input type="text" name="email" value="<?= $email ?>">
+        <input type="text" name="email" value="">
       </div>
       <!-- PASSWORD -->
       <div class="row medium-6 columns">
         <label for="password">paswoord</label>
         <div class="input-group">
-          <input class="input-group-field" type="<?= ($paswoord != '') ? 'text' : 'password' ?>" name="password" value="<?= $paswoord ?>">
-            <!-- GENERATE -->
-          <div class="input-group-button">
-            <input class="button" type="submit" name="generate" value="Genereer een paswoord">
-          </div>
+          <input class="input-group-field" type="password" name="password" value="">
+
         </div>
         <!-- SEND -->
-        <input class="button" type="submit" name="send" value="Registreer">
+        <input class="button" type="submit" name="send" value="Login">
       </div>
 
-
+      <p class="text-center">Nog geen account? Maak er dan eentje aan op de <a  href="<?= $registrationFormName ?>">registratiepagina</a>.</p>
     </form>
   </body>
 </html>
