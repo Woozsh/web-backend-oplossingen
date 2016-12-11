@@ -47,7 +47,7 @@ switch($messageType){
 
         </div>
         <!-- SEND -->
-        <input class="button" type="submit" name="send" value="Login">
+        <input class="button" type="submit" name="login" value="Login">
       </div>
 
       <p class="text-center">Nog geen account? Maak er dan eentje aan op de <a  href="<?= $registrationFormName ?>">registratiepagina</a>.</p>

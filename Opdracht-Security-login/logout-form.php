@@ -10,7 +10,7 @@ setcookie('login', '', time()-3600);
 
   $_SESSION['error']['type'] = "success";
   $_SESSION['error']['text'] = "U bent uitgelogd. Tot de volgende keer.";
-  header('refresh:5;url=' . $loginForm );
+  header('refresh:3;url=' . $loginForm );
 
 if(isset($_SESSION['error']['text'])) {
   $messageType = $_SESSION['error']['type'];
