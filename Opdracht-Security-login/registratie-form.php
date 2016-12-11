@@ -4,7 +4,12 @@ $email = '';
 $paswoord = '';
 $message = '';
 $messageType = '';
+$dashboard = "dashboard.php";
+$loginForm = 'login-form.php';
 
+if(isset($_COOKIE['login'])){
+  header('location: ' . $dashboard );
+}
 if(isset($_SESSION['generate'])){
   $email = $_SESSION['generate']['email'];
   $paswoord = $_SESSION['generate']['password'];
@@ -57,7 +62,7 @@ switch($messageType){
         <!-- SEND -->
         <input class="button" type="submit" name="send" value="Registreer">
       </div>
-
+      <p class="text-center">Ga naar de <a  href="<?= $loginForm ?>">login-pagina</a> als u al een account heeft.</p>
 
     </form>
   </body>

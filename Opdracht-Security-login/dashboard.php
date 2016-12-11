@@ -35,6 +35,21 @@ if($newSaltedEmail != $saltedEmail)
   unset($_SESSION['login']);
   setcookie('login', '', time()-3600);
 }
+
+//MESSAGE
+var_dump( $_SESSION);
+
+if(isset($_SESSION['error']['text'])) {
+  $messageType = $_SESSION['error']['type'];
+  $message = $_SESSION['error']['text'];
+}
+switch($messageType){
+  case 'error': $messageType = 'alert';
+  break;
+  case 'success': $messageType = 'success';
+  break;
+  default: $messageType = '';
+}
  ?>
 
 <!DOCTYPE html>
@@ -45,7 +60,11 @@ if($newSaltedEmail != $saltedEmail)
     <title>Dashboard</title>
   </head>
   <body>
-    <h1>Dashboard</h1>
-    <a href="logout-form.php">uitloggen</a>
+    <h1 class="text-center ">Dashboard</h1>
+    <div class="<?= ($messageType) ? 'callout' : '' ?> <?= $messageType ?>">
+      <p class="text-center "><?= $message ?></p>
+    </div>
+    <p class="text-center"> Welkom <?= $userArray[0]['email'] ?></p>
+    <a class="text-center " href="logout-form.php">uitloggen</a>
   </body>
 </html>

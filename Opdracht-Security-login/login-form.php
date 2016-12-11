@@ -3,8 +3,13 @@ session_start();
 $message = '';
 $messageType = '';
 $registrationFormName = 'registratie-form.php';
+$dashboard = "dashboard.php";
 
 var_dump( $_SESSION);
+
+if(isset($_COOKIE['login'])){
+  header('location: ' . $dashboard );
+}
 
 if(isset($_SESSION['error']['text'])) {
   $messageType = $_SESSION['error']['type'];
@@ -28,7 +33,6 @@ switch($messageType){
     <title>Inloggen</title>
   </head>
   <body>
-    <p><?=  $_SESSION['check'] ?></p>
     <h1 class="text-center">Inloggen</h1>
     <div class="<?= ($messageType) ? 'callout' : '' ?> <?= $messageType ?>">
       <p class="text-center "><?= $message ?></p>

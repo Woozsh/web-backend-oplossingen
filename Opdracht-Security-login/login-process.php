@@ -8,7 +8,7 @@ if(isset($_POST['login']))
   $email = $_POST['email'];
   $paswoord = $_POST['password'];
 
-  $db = new PDO("mysql:host=localhost;dname=opdracht-security-login", "root", "");
+  $db = new PDO("mysql:host=localhost;dbname=opdracht-security-login", "root", "");
 
   $query = 'SELECT * FROM users WHERE email = :email';
 
@@ -18,15 +18,10 @@ if(isset($_POST['login']))
 
   $statement->execute();
 
-  $user = array();
+  $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-  while($row = $statement->fetch(PDO::FETCH_ASSOC)){
-    $user[] = $row;
-  }
 
-  $_SESSION['check'] = $user[0]['email'];
-
-  if($email != $user[0]['email'])
+  if($email != $user['email'])
   {
     $_SESSION['error']['type'] = "error";
     $_SESSION['error']['text'] = "Email werd niet gevonden in de database.";
@@ -34,7 +29,7 @@ if(isset($_POST['login']))
   }
   else
   {
-    $salt = $user[0]['salt'];
+    $salt = $user['salt'];
     $saltedPassword = $paswoord . $salt;
     $newHash = hash("sha512", $saltedPassword);
     $dbHash = $user['hashed_password'];
@@ -55,5 +50,6 @@ if(isset($_POST['login']))
   }
 }
 
+header('location: ' . $loginForm );
 
  ?>
