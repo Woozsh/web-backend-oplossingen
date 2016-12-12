@@ -1,6 +1,9 @@
 <?php
 session_start();
 $loginForm = 'login-form.php';
+$dashboard = 'dashboard.php';
+$logoutForm = 'logout-form.php';
+$artikelOverzicht = 'artikel-overzicht.php';
 
 if(!isset($_COOKIE['login']))
 {
@@ -37,18 +40,21 @@ if($newSaltedEmail != $saltedEmail)
 }
 
 //MESSAGE
-var_dump( $_SESSION);
 
 if(isset($_SESSION['error']['text'])) {
   $messageType = $_SESSION['error']['type'];
   $message = $_SESSION['error']['text'];
 }
-switch($messageType){
-  case 'error': $messageType = 'alert';
-  break;
-  case 'success': $messageType = 'success';
-  break;
-  default: $messageType = '';
+if(isset($messageType))
+{
+  switch($messageType)
+  {
+    case 'error': $messageType = 'alert';
+    break;
+    case 'success': $messageType = 'success';
+    break;
+    default: $messageType = '';
+  }
 }
  ?>
 
@@ -60,14 +66,24 @@ switch($messageType){
     <title>Dashboard</title>
   </head>
   <body>
-    <h1 class="text-center ">Dashboard</h1>
-    <div class="<?= ($messageType) ? 'callout' : '' ?> <?= $messageType ?>" data-closable>
-      <p class="text-center "><?= $message ?></p>
-      <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
-    <span aria-hidden="true">&times;</span>
-  </button>
-    </div>
-    
+    <!-- topbar -->
+    <p ><a href="<?= $dashboard ?>">Terug naar Dashboard</a> | Ingelogd als <?= $cookie[0] ?> | <a href="<?= $logoutForm ?>">uitloggen</a></p>
 
+    <!-- titel -->
+    <h1 >Dashboard</h1>
+
+    <!-- messages -->
+    <?php if(isset($message)): ?>
+    <div class="<?= ($messageType) ? 'callout' : '' ?> <?= $messageType ?>">
+      <p ><?= $message ?></p>
+    </div>
+  <?php endif; ?>
+
+    <!-- context -->
+    <div >
+      <ul>
+        <li><a href="<?= $artikelOverzicht ?>">Artikels</a></li>
+      </ul>
+    </div>
   </body>
 </html>

@@ -33,7 +33,7 @@
     }
     else
     {
-        $db = new PDO("mysql:host=localhost;dbname=opdracht-security-login", "root", "");
+        $db = new PDO("mysql:host=localhost;dbname=opdracht-crud-cms", "root", "");
 
         $queryCheckUser = "SELECT * FROM users WHERE email = :email";
 
@@ -43,7 +43,7 @@
 
         $statementCheckUser->execute();
 
-        $userExists = $statementCheckUser->fetch(PDO::FETCH_ASSOC);
+        $userExists  = $statementCheckUser->fetch(PDO::FETCH_ASSOC);
 
         if($userExists['email'] == $email)
         {
