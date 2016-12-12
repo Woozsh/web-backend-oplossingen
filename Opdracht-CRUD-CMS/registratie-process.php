@@ -1,7 +1,7 @@
 <?php
   session_start();
-  $registrationFormName = 'registratie-form.php';
-  $dashboard = "dashboard.php";
+  include_once('partials/variables.php');
+
 
   //Generate Password on button press
   if(isset($_POST['generate']))
@@ -12,7 +12,7 @@
 
     $_SESSION['generate']['password'] = $generatedPassword;
 
-    header('location: ' . $registrationFormName );
+    header('location: ' . $registrationForm );
   }
 
   if(isset($_POST['send'])){
@@ -22,14 +22,14 @@
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL))
     {
-        $_SESSION['error']['type'] = "error";
-        $_SESSION['error']['text'] = "Invalid email format";
-        header('location: ' . $registrationFormName );
+        $_SESSION['notification']['type'] = "error";
+        $_SESSION['notification']['text'] = "Invalid email format";
+        header('location: ' . $registrationForm );
     }elseif($password == "")
     {
-      $_SESSION['error']['type'] = "error";
-      $_SESSION['error']['text'] = "Empty password";
-      header('location: ' . $registrationFormName );
+      $_SESSION['notification']['type'] = "error";
+      $_SESSION['notification']['text'] = "Empty password";
+      header('location: ' . $registrationForm);
     }
     else
     {
@@ -47,9 +47,9 @@
 
         if($userExists['email'] == $email)
         {
-          $_SESSION['error']['type'] = "error";
-          $_SESSION['error']['text'] = $email . " adres is al in gebruik!";
-          header('location: ' . $registrationFormName );
+          $_SESSION['notification']['type'] = "error";
+          $_SESSION['notification']['text'] = $email . " adres is al in gebruik!";
+          header('location: ' . $registrationForm );
         }
         else
         {
@@ -69,8 +69,8 @@
 
           if($UserAdded)
           {
-            $_SESSION['error']['type'] = "success";
-            $_SESSION['error']['text'] = "U bent met succes toegevoegd aan de database!";
+            $_SESSION['notification']['type'] = "success";
+            $_SESSION['notification']['text'] = "U bent met succes toegevoegd aan de database!";
             setcookie("login", $email . "," . hash('sha512', $email . $salt), time()+2592000);
             header('location: ' . $dashboard );
           }
@@ -96,6 +96,7 @@
 
     return $password;
   }
-  header('location: ' . $registrationFormName );
+  
+  header('location: ' . $registrationForm );
 
  ?>

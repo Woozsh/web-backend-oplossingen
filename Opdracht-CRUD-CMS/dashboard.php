@@ -1,14 +1,12 @@
 <?php
 session_start();
-$loginForm = 'login-form.php';
-$dashboard = 'dashboard.php';
-$logoutForm = 'logout-form.php';
-$artikelOverzicht = 'artikel-overzicht.php';
+include_once('partials/variables.php');
+
 
 if(!isset($_COOKIE['login']))
 {
-  $_SESSION['error']['type'] = "error";
-  $_SESSION['error']['text'] = "U moet eerst inloggen.";
+  $_SESSION['notification']['type'] = "error";
+  $_SESSION['notification']['text'] = "U moet eerst inloggen.";
   header('location: ' . $loginForm );
 }
 
@@ -16,7 +14,7 @@ $cookie = explode(",", $_COOKIE['login']);
 
 $email = $cookie[0];
 $saltedEmail = $cookie[1];
-$db = new PDO("mysql:host=localhost;dbname=opdracht-security-login", "root", "");
+$db = new PDO("mysql:host=localhost;dbname=opdracht-crud-cms", "root", "");
 
 $queryUser = "SELECT * FROM users WHERE email = :email";
 
@@ -26,11 +24,9 @@ $statementUser->bindValue(":email", $email);
 
 $statementUser->execute();
 
-$userArray = array();
+$userArray = $statementUser->fetch(PDO::FETCH_ASSOC);
 
-while($row = $statementUser->fetch(PDO::FETCH_ASSOC)) $userArray[] = $row;
-
-$salt = $userArray[0]['salt'];
+$salt = $userArray['salt'];
 $newSaltedEmail = hash('sha512', $email . $salt);
 
 if($newSaltedEmail != $saltedEmail)
@@ -41,21 +37,8 @@ if($newSaltedEmail != $saltedEmail)
 
 //MESSAGE
 
-if(isset($_SESSION['error']['text'])) {
-  $messageType = $_SESSION['error']['type'];
-  $message = $_SESSION['error']['text'];
-}
-if(isset($messageType))
-{
-  switch($messageType)
-  {
-    case 'error': $messageType = 'alert';
-    break;
-    case 'success': $messageType = 'success';
-    break;
-    default: $messageType = '';
-  }
-}
+include_once('partials/message.php');
+
  ?>
 
 <!DOCTYPE html>
@@ -73,11 +56,7 @@ if(isset($messageType))
     <h1 >Dashboard</h1>
 
     <!-- messages -->
-    <?php if(isset($message)): ?>
-    <div class="<?= ($messageType) ? 'callout' : '' ?> <?= $messageType ?>">
-      <p ><?= $message ?></p>
-    </div>
-  <?php endif; ?>
+    <?php include_once('partials/message-show.php') ?>
 
     <!-- context -->
     <div >

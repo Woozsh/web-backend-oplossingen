@@ -1,27 +1,15 @@
 <?php
 session_start();
-$message = '';
-$messageType = '';
-$registrationFormName = 'registratie-form.php';
-$dashboard = "dashboard.php";
+include_once('partials/variables.php');
 
-var_dump( $_SESSION);
-
+// redirect if logged in
 if(isset($_COOKIE['login'])){
   header('location: ' . $dashboard );
 }
 
-if(isset($_SESSION['error']['text'])) {
-  $messageType = $_SESSION['error']['type'];
-  $message = $_SESSION['error']['text'];
-}
-switch($messageType){
-  case 'error': $messageType = 'alert';
-  break;
-  case 'success': $messageType = 'success';
-  break;
-  default: $messageType = '';
-}
+//MESSAGE
+
+include_once('partials/message.php');
 
  ?>
 <!DOCTYPE html>
@@ -34,9 +22,10 @@ switch($messageType){
   </head>
   <body>
     <h1 class="text-center">Inloggen</h1>
-    <div class="<?= ($messageType) ? 'callout' : '' ?> <?= $messageType ?>">
-      <p class="text-center "><?= $message ?></p>
-    </div>
+    <!-- messages -->
+    <?php include_once('partials/message-show.php') ?>
+
+    <!-- form -->
     <form action="login-process.php" method="post">
         <!-- EMAIL -->
       <div class="row medium-6 columns">
@@ -54,7 +43,7 @@ switch($messageType){
         <input class="button" type="submit" name="login" value="Login">
       </div>
 
-      <p class="text-center">Nog geen account? Maak er dan eentje aan op de <a  href="<?= $registrationFormName ?>">registratiepagina</a>.</p>
+      <p class="text-center">Nog geen account? Maak er dan eentje aan op de <a  href="<?= $registrationForm ?>">registratiepagina</a>.</p>
     </form>
   </body>
 </html>

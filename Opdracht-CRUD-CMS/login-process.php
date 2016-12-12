@@ -1,7 +1,7 @@
 <?php
 session_start();
-$dashboard = 'dashboard.php';
-$loginForm = 'login-form.php';
+include_once('partials/variables.php');
+
 
 if(isset($_POST['login']))
 {
@@ -23,8 +23,8 @@ if(isset($_POST['login']))
 
   if($email != $user['email'])
   {
-    $_SESSION['error']['type'] = "error";
-    $_SESSION['error']['text'] = "Email werd niet gevonden in de database.";
+    $_SESSION['notification']['type'] = "error";
+    $_SESSION['notification']['text'] = "Email werd niet gevonden in de database.";
     header('location: ' . $loginForm );
   }
   else
@@ -36,14 +36,14 @@ if(isset($_POST['login']))
 
     if($newHash != $dbHash)
     {
-      $_SESSION['error']['type'] = "error";
-      $_SESSION['error']['text'] = "Het wachtwoord komt niet overeen met deze email.";
+      $_SESSION['notification']['type'] = "error";
+      $_SESSION['notification']['text'] = "Het wachtwoord komt niet overeen met deze email.";
       header('location: ' . $loginForm );
     }
     else
     {
-      $_SESSION['error']['type'] = "success";
-      $_SESSION['error']['text'] = "U bent met succes ingelogd!";
+      $_SESSION['notification']['type'] = "success";
+      $_SESSION['notification']['text'] = "U bent met succes ingelogd!";
       setcookie("login", $email . "," . hash('sha512', $email . $salt), time()+2592000);
       header('location: ' . $dashboard );
     }

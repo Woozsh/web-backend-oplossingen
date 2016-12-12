@@ -1,29 +1,20 @@
 <?php
 session_start();
 
-$message = '';
-$messageType = '';
-$loginForm = 'login-form.php';
+include_once('partials/variables.php');
+
 
 unset($_SESSION['login']);
 setcookie('login', '', time()-3600);
 
-  $_SESSION['error']['type'] = "success";
-  $_SESSION['error']['text'] = "U bent uitgelogd. Tot de volgende keer.";
+  $_SESSION['notification']['type'] = "success";
+  $_SESSION['notification']['text'] = "U bent uitgelogd. Tot de volgende keer.";
   header('refresh:3;url=' . $loginForm );
 
-if(isset($_SESSION['error']['text'])) {
-  $messageType = $_SESSION['error']['type'];
-  $message = $_SESSION['error']['text'];
-}
+  //MESSAGE
 
-switch($messageType){
-  case 'error': $messageType = 'alert';
-  break;
-  case 'success': $messageType = 'success';
-  break;
-  default: $messageType = '';
-}
+  include_once('partials/message.php');
+
 
  ?>
 <!DOCTYPE html>
@@ -35,9 +26,9 @@ switch($messageType){
     <title>Uitgelogd</title>
   </head>
   <body>
-    <h1 class="text-center">Uitgelogd</h1>
-    <div class="<?= ($messageType) ? 'callout' : '' ?> <?= $messageType ?>">
-      <p class="text-center "><?= $message ?></p>
-    </div>
+    <h1>Uitgelogd</h1>
+    <!-- messages -->
+    <?php include_once('partials/message-show.php') ?>
+
   </body>
 </html>

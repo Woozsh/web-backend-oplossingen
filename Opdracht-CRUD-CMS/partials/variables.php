@@ -6,4 +6,8 @@ $logoutForm = 'logout-form.php';
 $artikelOverzicht = 'artikel-overzicht.php';
 $artikelToevoegenForm = 'artikel-toevoegen-form.php';
 $artikelToevoegenProcess = 'artikel-toevoegen-process.php';
+$artikelWijzigenForm = 'artikel-wijzigen-form.php';
+$artikelWijzigenProcess = 'artikel-wijzigen-process.php';
+$artikelActiveren = 'artikel-activeren.php';
+$artikelVerwijderen = 'artikel-verwijderen.php';
  ?>

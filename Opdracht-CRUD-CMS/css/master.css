@@ -1,3 +1,12 @@
 body{
   margin: 5px 15px;
 }
+.not-active{
+  background-color: #ddd;
+  padding: 5px;
+  margin: 5px;
+}
+.active{
+  padding: 5px;
+  margin: 5px;
+}
