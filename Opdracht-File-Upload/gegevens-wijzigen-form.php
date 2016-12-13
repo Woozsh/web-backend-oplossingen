@@ -59,7 +59,7 @@ try {
           <div class="row">
             <div class="medium-6 columns">
               <label for="profielfoto">Profielfoto</label>
-              <img src="img/schild.png" alt="profielfoto">
+              <img src="img/<?= ($user['profile_picture'] == '') ? 'schild.png' : $user['profile_picture'] ?>" alt="profielfoto">
               <input type="file" name="profielfoto" value="">
             </div>
           </div>
