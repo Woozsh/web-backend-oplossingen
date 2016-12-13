@@ -8,7 +8,7 @@ try {
     $email = $_POST['email'];
     $id = $_SESSION['userid'];
     $name = $_FILES['profielfoto']['name'];
-    var_dump($_FILES['profielfoto']);
+
     if((($_FILES['profielfoto']['type'] == "image/gif")
     || ($_FILES['profielfoto']['type'] == "image/png")
     || ($_FILES['profielfoto']['type'] == "image/jpg")
@@ -22,15 +22,13 @@ try {
       }
       else
       {
-        $timestamp = date("d-m-Y-H-i-s");
-        $bestandsnaam = $timestamp . "_" . $name;
         define("ROOT", dirname(__FILE__));
 
-        // while (file_exists(ROOT . "/img/" . $bestandsnaam) {
-        //
-        //   $timestamp = date("d-m-Y-H-i-s");
-        //   $bestandsnaam = $timestamp . "_" . $name;
-				// }
+        do{
+          $timestamp = date("d-m-Y-H-i-s");
+          $bestandsnaam = $timestamp . "_" . $name;
+        }while(file_exists(ROOT . "/img/" . $bestandsnaam));
+
         move_uploaded_file($_FILES['profielfoto']['tmp_name'], ROOT . "/img/" . $bestandsnaam);
 
         //gegevens updaten
