@@ -23,7 +23,7 @@ try {
     $statementGetFilename->execute();
     $filename = $statementGetFilename->fetch(PDO::FETCH_ASSOC);
     $filename = $filename['file_name'];
-    
+
     define("ROOT", dirname(__FILE__));
 
     $thumbpath = ROOT . "/" . $thumb->getPath($filename);
@@ -51,7 +51,7 @@ try {
     if($success){
       $_SESSION['notification']['type'] = "success";
       $_SESSION['notification']['text'] =  "Foto verwijderd.";
-      // header('location: ' . $gallery);
+      header('location: ' . $gallery);
     }
 
   }
