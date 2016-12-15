@@ -28,7 +28,7 @@ include_once('partials/message.php');
     <h1 class="text-center">Registreren</h1>
     <!-- messages -->
     <?php include_once('partials/message-show.php') ?>
-    
+
     <form action="registratie-process.php" method="post">
         <!-- EMAIL -->
       <div class="row medium-6 columns">
@@ -39,7 +39,7 @@ include_once('partials/message.php');
       <div class="row medium-6 columns">
         <label for="password">paswoord</label>
         <div class="input-group">
-          <input class="input-group-field" type="<?= ($paswoord != '') ? 'text' : 'password' ?>" name="password" value="<?php if(isset($paswoord)) echo $paswoord ?>">
+          <input class="input-group-field" type="<?= (isset($paswoord) && $paswoord != '') ? 'text' : 'password' ?>" name="password" value="<?php if(isset($paswoord)) echo $paswoord ?>">
             <!-- GENERATE -->
           <div class="input-group-button">
             <input class="button" type="submit" name="generate" value="Genereer een paswoord">

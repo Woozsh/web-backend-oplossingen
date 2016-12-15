@@ -1,0 +1,63 @@
+*,html{
+	margin: 0;
+	padding: 0;
+}
+body{
+	font-family: 'Segoe UI Light', Helvetica,Arial,sans-serif;
+}
+h1,h2{
+	padding: 16px 8px;
+}
+h1{
+	border-bottom: 1px solid gray;
+	background: #242329;
+	color: whitesmoke;
+	box-shadow: 0 0 3px gray;
+	position: -webkit-sticky;
+	top:0;
+	font-weight: 300;
+	font-size: 24px;
+}
+h3{
+	border-bottom: 1px solid gray;
+	padding: 10px 0 3px;
+	font-weight: normal;
+	font-size: 1.5em;
+}
+main, h3{
+	display: block;
+	width: 80%;
+	margin: 0 auto 20px;
+}
+ul{
+	list-style: none;
+}
+li a{
+	display: block;
+	text-decoration: none;
+	color: gray;
+	padding: 5px 10px;
+}
+li a:hover{
+	color: black;
+	background: whitesmoke;
+	padding:4px 10px;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+li:first-child a{
+	margin: 10px 0 20px;
+}
+li:first-child::before{
+	content: "Laatste Nieuwe oefening";
+}
+li:first-child::after{
+	content: "Oudere oefeningen";
+	margin-bottom: 10px;
+}
+li:first-child::before,li:first-child::after{
+	width: 100%;
+	display: block;
+	border-bottom: 1px solid gray;
+	padding-bottom: 3px;
+}

@@ -40,7 +40,7 @@ include_once('partials/message.php');
       <div class="row medium-6 columns">
         <label for="password">paswoord</label>
         <div class="input-group">
-          <input class="input-group-field" type="<?= ($paswoord != '') ? 'text' : 'password' ?>" name="password" value="<?php if(isset($paswoord)) echo $paswoord ?>">
+          <input class="input-group-field" type="<?= (isset($paswoord) && $paswoord != '') ? 'text' : 'password' ?>" name="password" value="<?php if(isset($paswoord)) echo $paswoord ?>">
             <!-- GENERATE -->
           <div class="input-group-button">
             <input class="button" type="submit" name="generate" value="Genereer een paswoord">
