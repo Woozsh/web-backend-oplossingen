@@ -1,9 +1,14 @@
 <?php
 session_start();
+var_dump($_SESSION);
+
+if(isset($_POST['adres']))
+{
   $_SESSION['straat'] = $_POST['straat'];
   $_SESSION['nummer'] = $_POST['nummer'];
   $_SESSION['gemeente'] = $_POST['gemeente'];
   $_SESSION['postcode'] = $_POST['postcode'];
+}
 
 ?>
 <!DOCTYPE html>
@@ -26,9 +31,5 @@ session_start();
 
     </ul>
 
-    <!-- <form action="<?php session_destroy();?>" method="post">
-      <button type="button" name="button" class="button alert">Destroy Session!</button>
-
-    </form> -->
   </body>
 </html>

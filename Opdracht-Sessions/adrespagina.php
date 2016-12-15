@@ -1,7 +1,13 @@
 <?php
   session_start();
-  $_SESSION['mail'] = $_POST['mail'];
-  $_SESSION['nickname'] = $_POST['nickname'];
+  var_dump($_SESSION);
+
+
+  if(isset($_POST['volgende']))
+  {
+    $_SESSION['mail'] = $_POST['mail'];
+    $_SESSION['nickname'] = $_POST['nickname'];
+  }
 
 
 ?>
@@ -23,20 +29,16 @@
     <form class="" action="overzichtspagina.php" method="post">
       <div class="row">
         <label for="straat">Straat</label>
-        <input type="text" name="straat" id="straat" required>
+        <input type="text" name="straat" value="<?= (isset($_SESSION['straat']) ? $_SESSION['straat'] : '') ?>" id="straat" required>
         <label for="nummer">Nummer</label>
-        <input type="tel" name="nummer" id="nummer" required>
+        <input type="tel" name="nummer" id="nummer" value="<?= (isset($_SESSION['nummer']) ? $_SESSION['nummer'] : '') ?>" required>
         <label for="gemeente">Gemeente</label>
-        <input type="text" name="gemeente" id="gemeente" required>
+        <input type="text" name="gemeente" id="gemeente" value="<?= (isset($_SESSION['gemeente']) ? $_SESSION['gemeente'] : '') ?>" required>
         <label for="postcode">Postcode</label>
-        <input type="text" name="postcode" id="postcode" required>
-        <input type="submit" name="name" class="button" value="Volgende">
+        <input type="text" name="postcode" id="postcode" value="<?= (isset($_SESSION['postcode']) ? $_SESSION['postcode'] : '') ?>" required>
+        <input type="submit" name="adres" class="button" value="Volgende">
       </div>
 
     </form>
-    <!-- <form action="<?php session_destroy();?>" method="post">
-      <button type="button" name="button" class="button alert">Destroy Session!</button>
-
-    </form> -->
   </body>
 </html>
