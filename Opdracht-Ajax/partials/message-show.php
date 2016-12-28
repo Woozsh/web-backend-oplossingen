@@ -1,7 +1,6 @@
 <!-- message -->
-<?php if(isset($message)): ?>
+<?php  ?>
 <div class="<?= ($messageType) ? 'callout' : '' ?> <?= $messageType ?>">
-  <p ><?= $message ?></p>
 </div>
-<?php endif; ?>
+<?php ?>
 <!-- end message -->

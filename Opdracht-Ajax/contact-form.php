@@ -22,36 +22,37 @@ if(isset($_SESSION['contact-data']))
     <title>Contact</title>
   </head>
   <body>
-    <?php  include_once('partials/message-show.php'); ?>
-    <form action="contact.php" method="post">
-      <div class="row">
-        <div class="medium-6">
-          <h1>Contacteer ons</h1>
+    <div class="container">
+      <form action="contact.php" method="post">
+        <div class="row">
+          <div class="medium-6">
+            <h1>Contacteer ons</h1>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="medium-6">
-          <label for="email">E-mailadres</label>
-          <input type="mail" name="email" value="<?php if(isset($email)) echo $email ?>">
+        <div class="row">
+          <div class="medium-6">
+            <label for="email">E-mailadres</label>
+            <input type="mail" name="email" value="<?php if(isset($email)) echo $email ?>">
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="medium-6">
-          <label for="boodschap">Boodschap</label>
-          <textarea name="boodschap" rows="8" ><?php if(isset($boodschap)) echo $boodschap ?></textarea>
+        <div class="row">
+          <div class="medium-6">
+            <label for="boodschap">Boodschap</label>
+            <textarea name="boodschap" rows="8" ><?php if(isset($boodschap)) echo $boodschap ?></textarea>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="medium-6">
-          <input type="checkbox" name="kopie" value='1' <?php if(isset($kopie) && $kopie) echo 'checked' ?>> Stuur een kopie naar mezelf
+        <div class="row">
+          <div class="medium-6">
+            <input type="checkbox" name="kopie" value='1' <?php if(isset($kopie) && $kopie) echo 'checked' ?>> Stuur een kopie naar mezelf
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="medium-6">
-          <input class="button" type="submit" name="send" value="Verzenden">
+        <div class="row">
+          <div class="medium-6">
+            <input class="button" type="submit" name="send" value="Verzenden">
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>
       $(function()
@@ -65,9 +66,19 @@ if(isset($_SESSION['contact-data']))
             data: input,
             success: function(data)
   					{
-  						console.log(data);
+              output = JSON.parse(data);
+              if(output['type'] === 'success')
+              {
+                $('form').fadeOut(1000, function(){
+                  $(this).empty().append('<p>Bedankt! Uw bericht is goed verzonden!<p>').fadeIn();
+                });
+
+              }
+              else if(output['type'] === 'error'){
+                $('form').prepend('<p>Oeps, er ging iets mis. Probeer opnieuw!<p>').hide().fadeIn();
+              }
   					}
-          })
+          });
           return false;
         })
       })
