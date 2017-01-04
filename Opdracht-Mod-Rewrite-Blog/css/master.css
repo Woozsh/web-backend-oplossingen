@@ -1,0 +1,11 @@
+
+
+body{
+  max-width: 50%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fdfdfd;
+}
+h1{
+  border-bottom: 1px solid #e5e5e5;
+}
