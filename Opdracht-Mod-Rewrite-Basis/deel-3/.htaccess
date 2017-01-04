@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteRule ^original.php$ redirect.php
+RewriteRule ^$ original.php
+RewriteRule ^([^/\.]+)/?$$ index.php?user=$1
