@@ -1,0 +1,11 @@
+RewriteEngine On
+
+RewriteRule ^/Opdracht-Mod-Rewrite-Blog/artikels/?$ artikel-overzicht.php
+
+RewriteRule ^/Opdracht-Mod-Rewrite-Blog/artikels/toevoegen/?$ artikel-toevoegen-form.php
+
+RewriteRule ^/Opdracht-Mod-Rewrite-Blog/artikels/toevoegen/confirm/?$ artikel-toevoegen.php
+
+RewriteRule ^/Opdracht-Mod-Rewrite-Blog/artikels/zoeken/content/([^/\.]+)/?$ artikel-zoeken.php?query-woord=$1
+
+RewriteRule ^/Opdracht-Mod-Rewrite-Blog/artikels/zoeken/datum/([\d]+)/?$ artikel-zoeken.php?query-datum=$1

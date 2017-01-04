@@ -18,6 +18,8 @@ try {
   $_SESSION['notification']['text'] =  "Kon artikels niet ophalen. " . $e->getMessage();
 }
 
+$dirname = explode("/", $_SERVER['REQUEST_URI']);
+$basePath = "/" . $dirname[1] . "/";
  ?>
 
 
@@ -25,14 +27,14 @@ try {
  <html>
    <head>
      <meta charset="utf-8">
-     <link rel="stylesheet" href="../foundation.min.css">
+     <link rel="stylesheet" href="/../foundation.min.css">
      <link rel="stylesheet" href="css/master.css">
      <title>Artikel Overzicht</title>
    </head>
    <body>
      <?php include_once('classes/message-show.php') ?>
 
-     <form class="" action="artikel-zoeken.php" method="get">
+     <form class="" action="artikel-zoeken-redirect.php" method="get">
        <div class="row">
          <label for="query-woord">Zoeken in artikels</label>
        </div>
@@ -42,7 +44,7 @@ try {
        </div>
      </form>
 
-     <form class="" action="artikel-zoeken.php" method="get">
+     <form class="" action="artikel-zoeken-redirect.php" method="get">
        <div class="row">
          <label for="query-datum">Zoeken in artikels</label>
        </div>
@@ -61,7 +63,7 @@ try {
      </form>
 
      <h1>Artikels Overzicht</h1>
-     <a href="artikel-toevoegen-form.php">Artikel toevoegen</a>
+     <a href="artikels/toevoegen">Artikel toevoegen</a>
      <?php foreach($artikels as $artikel): ?>
        <article class="">
          <h2><?= $artikel['titel'] ?> | <?= $artikel['datum'] ?></h2>

@@ -12,6 +12,11 @@ if(isset($_SESSION['data']))
 
   unset($_SESSION['data']);
 }
+
+
+$dirname = explode("/", $_SERVER['REQUEST_URI']);
+$basePath = "/" . $dirname[1] . "/";
+
  ?>
 
 
@@ -19,7 +24,7 @@ if(isset($_SESSION['data']))
 <html>
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="../foundation.min.css">
+    <link rel="stylesheet" href="/../foundation.min.css">
     <title>Artikels Toevoegen</title>
   </head>
   <body>
@@ -27,8 +32,8 @@ if(isset($_SESSION['data']))
     <?php include_once('classes/message-show.php') ?>
 
     <h1>Artikel Toevoegen</h1>
-    <a href="artikel-overzicht.php">Terug naar overzicht</a>
-    <form class="" action="artikel-toevoegen.php" method="post">
+    <a href="<?= $basePath ?>artikels">Terug naar overzicht</a>
+    <form class="" action="<?= $basePath ?>artikels/toevoegen/confirm/" method="post">
       <div class="row">
         <label for="titel">Titel</label>
         <input type="text" name="titel" value="<?php if(isset($titel)) echo $titel ?>">

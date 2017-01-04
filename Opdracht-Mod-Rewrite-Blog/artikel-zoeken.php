@@ -46,7 +46,7 @@ try {
  <html>
    <head>
      <meta charset="utf-8">
-     <link rel="stylesheet" href="../foundation.min.css">
+     <link rel="stylesheet" href="/../foundation.min.css">
      <link rel="stylesheet" href="css/master.css">
      <title>Artikel Overzicht</title>
    </head>
