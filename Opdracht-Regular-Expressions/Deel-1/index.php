@@ -1,22 +1,19 @@
 <?php
-if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest')
-	{
-    if(isset($_POST['regex']) && isset($_POST['string']))
-    {
-      echo $resultaat = "12";
-    }
-  }
-  else {
-    //geen ajax request
-  }
+if(isset($_POST['submit']))
+{
+	$reg = $_POST['regex'];
+	$regEx = '/' . $_POST['regex'] . '/';
+	$searchString = $_POST['string'];
+	$replaceString = '<span>#</span>';
+	$resultaat = preg_replace($regEx, $replaceString, $searchString);
+}
 
  ?>
-
-
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
+		<link rel="stylesheet" href="css/master.css">
     <link rel="stylesheet" href="../../foundation.min.css">
     <title>RegEx Tester</title>
   </head>
@@ -27,35 +24,20 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQ
       </div>
       <div class="row">
         <label for="regex">Regular Expression</label>
-        <input type="text" name="regex" value="">
+        <input type="text" name="regex" value="<?php if(isset($reg)) echo $reg ?>">
       </div>
-      <div class="row">
+			<div class="row">
         <label for="string">String</label>
-        <textarea name="string" rows="8" cols="80"></textarea>
+        <textarea name="string" rows="8" cols="80"><?php if(isset($searchString)) echo $searchString ?></textarea>
+      </div>
+			<div class="row">
+				<input class="button" type="submit" name="submit" value="Submit">
       </div>
       <?php if(isset($resultaat)): ?>
       <div class="row">
-        <p>Resultaat: <?= $resultaat ?></p>
+        <p class="resultaat">Resultaat: <?= $resultaat ?></p>
       </div>
       <?php endif; ?>
     </form>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-    <script>
-      $(function(){
-        $('form').keypress(function(e){
-          if(e.which == 13) {
-            $.ajax({
-              type: 'post',
-              url: 'index.php',
-              data: input,
-              success: function(data)
-    					{
-    					}
-            });
-          }
-        });
-      })
-    </script>
   </body>
 </html>
