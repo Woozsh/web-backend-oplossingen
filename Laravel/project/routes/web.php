@@ -12,5 +12,13 @@
 */
 
 Route::get('/', 'PagesController@home');
-Route::get('about', 'PagesController@about');
-Route::get('boeken', 'BoekenController@index');
+
+Route::get('books', 'BooksController@index');
+Route::get('books/{book}', 'BooksController@show');
+Route::get('books/{book}/edit', 'BooksController@edit');
+Route::patch('books/{book}/', 'BooksController@update');
+
+Route::get('sellers', 'SellersController@index');
+Route::get('sellers/{seller}', 'SellersController@show');
+Route::post('sellers/{seller}/books', 'SellersController@addBook');
+Route::post('sellers', 'SellersController@addSeller');

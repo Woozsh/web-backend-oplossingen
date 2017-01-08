@@ -9,8 +9,18 @@
   </head>
   <body>
     <div class="container">
+      <p><a href="/">Terug naar Dashboard</a>@yield('navbar')<a href="#" class="pull-right">Logout</a></p>
+
 
           @yield('content')
+    </div>
 
+    <script>
+      jQuery(document).ready(function($) {
+        $(".clickable-row").click(function() {
+            window.document.location = $(this).data("href");
+        });
+      });
+    </script>
   </body>
 </html>

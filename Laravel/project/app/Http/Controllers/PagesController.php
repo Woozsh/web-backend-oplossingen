@@ -11,11 +11,6 @@ class PagesController extends Controller
       return view('welcome');
     }
 
-    public function about()
-    {
-      $keywords = ['Wieners', 'Penises', 'Crotches'];
-      return view('about', compact('keywords'));
-    }
 
-    
+
 }
