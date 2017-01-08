@@ -34,6 +34,6 @@ class CreateBoekenTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('boeken');
+        Schema::dropIfExists('books');
     }
 }

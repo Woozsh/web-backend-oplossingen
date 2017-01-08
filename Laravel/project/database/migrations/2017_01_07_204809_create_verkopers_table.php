@@ -17,7 +17,7 @@ class CreateVerkopersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('surname');
-            $table->text('email')->unique();
+            $table->string('email')->unique();
             $table->string('phone')->unique();
             $table->timestamps();
         });
@@ -30,6 +30,6 @@ class CreateVerkopersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('verkopers');
+        Schema::dropIfExists('sellers');
     }
 }
