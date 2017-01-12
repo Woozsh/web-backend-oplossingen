@@ -54,17 +54,7 @@
     <div class="well post">
       <div class="row">
         <div class="col-md-2 flex-center">
-          <form action="/posts/{{ $post->id }}/upvote" method="post">
-              {{ csrf_field() }}
-
-              <button type="submit" name="button" class="no-btn glyphicon glyphicon-chevron-up"></button>
-          </form>
-          Score: {{ $post->score }}
-          <form action="/posts/{{ $post->id }}/downvote" method="post">
-              {{ csrf_field() }}
-
-              <button type="submit" name="button" class="no-btn glyphicon glyphicon-chevron-down"></button>
-          </form>
+          @include('../partials/votes', ['id' => $post->id, 'score' => $post->score, 'name' => 'posts'])
         </div>
         <div class="col-md-9">
           <h3>{{ $post->title }}</h3>

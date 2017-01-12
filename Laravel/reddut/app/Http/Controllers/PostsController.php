@@ -92,7 +92,15 @@ class PostsController extends Controller
 
         $post->update(['score' => ($post->score + 2)]);
       }
-      elseif(!$voted)
+      elseif($voted)
+      {
+        DB::table('votes')
+          ->where('id', $voted->id)
+          ->delete();
+
+        $post->update(['score' => ($post->score - 1)]);
+      }
+      else
       {
         DB::table('votes')->insert(
             ['user_id' => Auth::user()->id,
@@ -119,7 +127,15 @@ class PostsController extends Controller
 
         $post->update(['score' => ($post->score - 2)]);
       }
-      elseif(!$voted)
+      elseif($voted)
+      {
+        DB::table('votes')
+          ->where('id', $voted->id)
+          ->delete();
+
+        $post->update(['score' => ($post->score + 1)]);
+      }
+      else
       {
         DB::table('votes')->insert(
             ['user_id' => Auth::user()->id,

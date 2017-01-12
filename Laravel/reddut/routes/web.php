@@ -40,3 +40,7 @@ Route::post('posts', 'PostsController@addPost');
 
 //COMMENT DELETE
 Route::delete('comments/{comment}', 'CommentsController@delete');
+
+//Comment VOTE
+Route::post('comments/{comment}/upvote', 'CommentsController@upvote');
+Route::post('comments/{comment}/downvote', 'CommentsController@downvote');

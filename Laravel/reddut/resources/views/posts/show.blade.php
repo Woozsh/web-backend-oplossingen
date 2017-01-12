@@ -15,9 +15,7 @@
   <div class="well well-lg post">
     <div class="row">
       <div class="col-md-2 flex-center">
-        <p><i class="glyphicon glyphicon-chevron-up"></i></p>
-        <p>Score: {{ $post->score }}</p>
-        <p><i class="glyphicon glyphicon-chevron-down"></i></p>
+        @include('../partials/votes', ['id' => $post->id, 'score' => $post->score, 'name' => 'posts'])
       </div>
       <div class="col-md-9">
         <p>{{ $post->body }}</p>
@@ -90,9 +88,7 @@
     <div class="well well-md">
       <div class="row">
         <div class="col-md-1 flex-center">
-          <p><i class="glyphicon glyphicon-chevron-up"></i></p>
-          <p>Score: {{ $comment->score }}</p>
-          <p><i class="glyphicon glyphicon-chevron-down"></i></p>
+          @include('../partials/votes', ['id' => $comment->id, 'score' => $comment->score, 'name' => 'comments'])
         </div>
         <div class="col-md-2 line-right">
           <p>{{ $comment->user->name }}</p>
