@@ -13,40 +13,51 @@
     <li>{{ $seller->phone }}</li>
   </ul>
   <h2>Voeg een boek toe van deze verkoper</h2>
+  @if (count($errors))
+    <div class="alert alert-warning alert-dismissable fade in">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <ul>
+        @foreach ($errors->all() as $error)
+          <li>{{ $error}}</li>
+        @endforeach
+      </ul>
+    </div>
+  @endif
   <form class="form-horizontal" action="/sellers/{{ $seller->id }}/books" method="POST">
-    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+      {{ csrf_field() }}
 
       <div class="form-group">
         <label class="control-label col-sm-2" for="title">Title:</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="title" name="title"placeholder="Enter title">
+          <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" value="{{ old('title') }}">
         </div>
       </div>
 
       <div class="form-group">
         <label class="control-label col-sm-2" for="author">Author:</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="author" name="author" placeholder="Enter author">
+          <input type="text" class="form-control" id="author" name="author" placeholder="Enter author" value="{{ old('author') }}">
         </div>
       </div>
 
       <div class="form-group">
         <label class="control-label col-sm-2" for="newprice">Original Price:</label>
         <div class="col-sm-10">
-          <input type="number" class="form-control" id="newprice" name="newprice" placeholder="Enter newprice">
+          <input type="number" class="form-control" id="newprice" name="newprice" placeholder="Enter newprice" value="{{ old('newprice') }}">
         </div>
       </div>
 
     <div class="form-group">
       <label class="control-label col-sm-2" for="price">Price:</label>
       <div class="col-sm-10">
-        <input type="number" class="form-control" id="price" name="price" placeholder="Enter price">
+        <input type="number" class="form-control" id="price" name="price" placeholder="Enter price" value="{{ old('price') }}">
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2" for="comment">Comment:</label>
       <div class="col-sm-10">
-        <textarea name="comment" class="form-control" placeholder="Enter comment"></textarea>
+        <textarea name="comment" class="form-control" placeholder="Enter comment">{{ old('comment') }}</textarea>
       </div>
     </div>
     <div class="form-group">
@@ -55,9 +66,12 @@
       </div>
     </div>
   </form>
+
+
+
   <h1>Alle boeken van {{ $seller->name }} {{ $seller->surname }}</h1>
   @foreach ($seller->books as $book)
-    <div class="book">
+    <div class="well">
       <a href="../../books/{{ $book->id}}"><h3>{{ $book->title }}</h3></a>
       <p>{{ $book->author }} | €{{ $book->price }}</p>
       <p><a href="/books/{{$book->id}}/edit">Edit</a></p>

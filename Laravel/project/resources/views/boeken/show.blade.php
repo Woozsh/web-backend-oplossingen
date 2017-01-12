@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-  <div class="book">
+  <div class="well">
     <h3>{{ $book->title }}</h3>
     <p>Verkoper: <a href="../../sellers/{{ $book->seller->id}}">{{ $book->seller->name }} {{ $book->seller->surname }}</a></p>
     <p>Auteur: {{ $book->author }}</p>

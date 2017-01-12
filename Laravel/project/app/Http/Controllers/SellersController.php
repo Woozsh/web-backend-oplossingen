@@ -21,6 +21,13 @@ class SellersController extends Controller
 
   public function addBook(Request $request, Seller $seller)
   {
+    $this->validate($request, [
+      'title' => 'required',
+      'author' => 'required',
+      'newprice' => 'required',
+      'price' => 'required'
+    ]);
+
     $seller->addBook(
       new Book($request->all())
     );
@@ -30,6 +37,12 @@ class SellersController extends Controller
 
   public function addSeller(Request $request, Seller $seller)
   {
+    $this->validate($request, [
+      'name' => 'required',
+      'surname' => 'required',
+      'email' => 'required',
+      'phone' => 'required'
+    ]);
 
     $seller->create($request->all());
 

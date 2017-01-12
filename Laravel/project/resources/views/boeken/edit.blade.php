@@ -7,8 +7,9 @@
   <h1>Edit the Book from {{$book->seller->name}} {{$book->seller->surname}}</h1>
 
   <form class="form-horizontal" action="/books/{{$book->id}}" method="POST">
+    
     {{ method_field('PATCH') }}
-    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    {{ csrf_field() }}
 
       <div class="form-group">
         <label class="control-label col-sm-2" for="title">Title:</label>
