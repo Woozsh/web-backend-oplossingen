@@ -41,10 +41,10 @@
 
 
 
-{{-- PLACE COMMENT --}}
+{{-- EDIT COMMENT --}}
 
   @if (Auth::check())
-    <h3>Voeg een comment toe:</h3>
+    <h3>Pas je comment aan:</h3>
     @if (count($errors))
       <div class="alert alert-warning alert-dismissable fade in">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -55,20 +55,21 @@
         </ul>
       </div>
     @endif
-    <form class="form-horizontal" action="/posts/{{ $post->id }}/comment" method="POST">
+    <form class="form-horizontal" action="/comments/{{ $comment->id }}" method="POST">
+      <input type="hidden" name="_method" value="PATCH">
 
         {{ csrf_field() }}
 
       <div class="form-group">
         <label class="control-label col-sm-2" for="body">Comment:</label>
         <div class="col-sm-10">
-          <textarea name="body" class="form-control" placeholder="Enter comment">{{ old('body') }}</textarea>
+          <textarea name="body" class="form-control" placeholder="Enter comment">{{ $comment->body }}</textarea>
         </div>
       </div>
 
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-default">Add Comment</button>
+          <button type="submit" class="btn btn-primary">Update Comment</button>
         </div>
       </div>
 
@@ -92,16 +93,15 @@
         </div>
         <div class="col-md-2 line-right">
           <p>{{ $comment->user->name }}</p>
-          <p>{{ Carbon\Carbon::parse($comment->created_at)->format('d-m-Y H u i') }}</p>
+          <p>{{ Carbon\Carbon::parse($comment->created_at)->format('d-m-Y H:i:s') }}</p>
 
         </div>
         <div class="col-md-8">
           <p>{{ $comment->body }}</p>
         </div>
-        {{-- EDIT & DELETE --}}
         <div class="col-md-1 flex-center">
           @if (Auth::check() && $comment->user->name == Auth::user()->name)
-            <form action="/comments/{{ $comment->id }}/edit" method="post">
+            <form action="/posts/comment/{{ $comment->id }}/edit" method="post">
               {{ csrf_field() }}
 
                 <button type="submit" name="button" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-edit"></i></button>

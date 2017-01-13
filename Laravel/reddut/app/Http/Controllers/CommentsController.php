@@ -17,6 +17,26 @@ class CommentsController extends Controller
       return redirect('/posts/' . $comment->post->id);
     }
 
+    //edit
+      public function edit(Comment $comment)
+      {
+        $post = $comment->post;
+        $comments = $post->comments;
+        if (Auth::check() && $comment->user->name == Auth::user()->name) {
+          return view('posts.editComment', compact('post', 'comments','comment'));
+        }else{
+          return back();
+        }
+      }
+
+      public function update(Request $request, Comment $comment)
+      {
+        $comment->update($request->All());
+
+        return redirect('/posts/' . $comment->post->id);
+      }
+
+
     public function upvote(Comment $comment)
     {
       $voted = DB::table('votes')->where([

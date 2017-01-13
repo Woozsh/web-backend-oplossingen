@@ -63,8 +63,8 @@
             <p>{{ Carbon\Carbon::parse($post->created_at)->format('d-m-Y H:i:s') }} by <i>{{ $post->user->name}}</i></p>
           </a>
         </div>
+        <div class="col-md-1">
         @if (Auth::check() && $post->user->name == Auth::user()->name)
-          <div class="col-md-1">
             <form action="/posts/{{ $post->id }}/edit" method="post">
               {{ csrf_field() }}
 
@@ -76,8 +76,8 @@
 
                 <button type="submit" name="button" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button>
             </form>
-          </div>
         @endif
+      </div>
       </div>
     </div>
 
