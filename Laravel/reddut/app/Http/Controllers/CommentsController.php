@@ -22,7 +22,7 @@ class CommentsController extends Controller
       {
         $post = $comment->post;
         $comments = $post->comments;
-        if (Auth::check() && $comment->user->name == Auth::user()->name) {
+        if (Auth::user()->isAdmin || Auth::check() && $comment->user->name == Auth::user()->name) {
           return view('posts.editComment', compact('post', 'comments','comment'));
         }else{
           return back();

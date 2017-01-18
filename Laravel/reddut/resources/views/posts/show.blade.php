@@ -20,7 +20,7 @@
       <div class="col-md-9">
         <p>{{ $post->body }}</p>
       </div>
-      @if (Auth::check() && $post->user->name == Auth::user()->name)
+      @if (Auth::user()->isAdmin || Auth::check() && $post->user->name == Auth::user()->name)
         <div class="col-md-1">
           <form action="/posts/{{ $post->id }}/edit" method="post">
             {{ csrf_field() }}
@@ -93,14 +93,13 @@
         <div class="col-md-2 line-right">
           <p>{{ $comment->user->name }}</p>
           <p>{{ Carbon\Carbon::parse($comment->created_at)->format('d-m-Y H u i') }}</p>
-
         </div>
         <div class="col-md-8">
           <p>{{ $comment->body }}</p>
         </div>
         {{-- EDIT & DELETE --}}
         <div class="col-md-1 flex-center">
-          @if (Auth::check() && $comment->user->name == Auth::user()->name)
+          @if (Auth::user()->isAdmin || Auth::check() && $comment->user->name == Auth::user()->name)
             <form action="/comments/{{ $comment->id }}/edit" method="post">
               {{ csrf_field() }}
 

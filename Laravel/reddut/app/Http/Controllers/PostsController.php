@@ -26,7 +26,7 @@ class PostsController extends Controller
   public function editPost(Post $post)
   {
     $comments = $post->comments;
-    if (Auth::check() && $post->user->name == Auth::user()->name) {
+    if (Auth::user()->isAdmin || Auth::check() && $post->user->name == Auth::user()->name) {
       return view('posts.editPost', compact('post', 'comments'));
     }else{
       return back();

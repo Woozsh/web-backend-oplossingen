@@ -64,7 +64,7 @@
           </a>
         </div>
         <div class="col-md-1">
-        @if (Auth::check() && $post->user->name == Auth::user()->name)
+        @if (Auth::user()->isAdmin || Auth::check() && $post->user->name == Auth::user()->name)
             <form action="/posts/{{ $post->id }}/edit" method="post">
               {{ csrf_field() }}
 

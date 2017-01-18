@@ -67,20 +67,21 @@
   @foreach ($comments as $comment)
     <div class="well well-md">
       <div class="row">
-        <div class="col-md-1">
-          <p><i class="glyphicon glyphicon-chevron-up"></i></p>
-          <p><i class="glyphicon glyphicon-chevron-down"></i></p>
+        <div class="col-md-1 flex-center">
+          @include('../partials/votes', ['id' => $comment->id, 'score' => $comment->score, 'name' => 'comments'])
         </div>
-        <div class="col-md-1">
-          <p class="text-center">{{ $comment->score}}</p>
+        <div class="col-md-2 line-right">
+          <p>{{ $comment->user->name }}</p>
+          <p>{{ Carbon\Carbon::parse($comment->created_at)->format('d-m-Y H u i') }}</p>
+
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8">
           <p>{{ $comment->body }}</p>
-          <i>-{{ $comment->user->name }}</i>
         </div>
-        <div class="col-md-1">
-          @if ($comment->user->name == Auth::user()->name)
-            <form action="/posts/{{ $post->id }}/edit" method="post">
+        {{-- EDIT & DELETE --}}
+        <div class="col-md-1 flex-center">
+          @if (Auth::user()->isAdmin || Auth::check() && $comment->user->name == Auth::user()->name)
+            <form action="/comments/{{ $comment->id }}/edit" method="post">
               {{ csrf_field() }}
 
                 <button type="submit" name="button" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-edit"></i></button>
