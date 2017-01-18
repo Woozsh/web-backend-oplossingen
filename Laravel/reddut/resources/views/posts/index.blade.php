@@ -19,6 +19,7 @@
       </div>
     @endif
 
+{{-- MAKE POST --}}
       <form class="form-horizontal" action="posts" method="POST">
 
         {{ csrf_field() }}
@@ -32,7 +33,7 @@
         <div class="form-group">
           <label class="control-label col-sm-2" for="body">Body:</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="body" name="body" placeholder="Enter body" value="{{ old('body') }}">
+            <textarea name="body" id="body" class="form-control" placeholder="Enter body">{{ old('body') }}</textarea>
           </div>
         </div>
       <div class="form-group">
@@ -58,19 +59,19 @@
         </div>
         <div class="col-md-9">
           <h3>{{ $post->title }}</h3>
-          <a class="post" href="posts/{{ $post->id }}">
+          <a class="post" href="{{ url('/posts/' . $post->id) }}">
             <p>reacties: {{ count($post->comments) }}</p>
             <p>{{ Carbon\Carbon::parse($post->created_at)->format('d-m-Y H:i:s') }} by <i>{{ $post->user->name}}</i></p>
           </a>
         </div>
         <div class="col-md-1">
-        @if (Auth::user()->isAdmin || Auth::check() && $post->user->name == Auth::user()->name)
-            <form action="/posts/{{ $post->id }}/edit" method="post">
+        @if (Auth::check() && (Auth::user()->isAdmin || $post->user->name == Auth::user()->name))
+            <form action="{{ url('/posts/' . $post->id . '/edit') }}" method="post">
               {{ csrf_field() }}
 
                 <button type="submit" name="button" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-edit"></i></button>
             </form><br>
-            <form action="/posts/{{ $post->id }}" method="post">
+            <form action="{{ url('/posts/' . $post->id)}}" method="post">
               {{ csrf_field() }}
                 <input type="hidden" name="_method" value="DELETE">
 

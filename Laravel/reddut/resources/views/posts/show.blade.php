@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('navbar')
-  <a class="navbar-brand" href="../posts">Terug naar Posts</a>
+  <a class="navbar-brand" href="{{ url('/posts') }}">Terug naar Posts</a>
 
 @endsection
 @section('content')
@@ -20,21 +20,21 @@
       <div class="col-md-9">
         <p>{{ $post->body }}</p>
       </div>
-      @if (Auth::user()->isAdmin || Auth::check() && $post->user->name == Auth::user()->name)
-        <div class="col-md-1">
-          <form action="/posts/{{ $post->id }}/edit" method="post">
+      <div class="col-md-1">
+      @if (Auth::check() && (Auth::user()->isAdmin || $post->user->name == Auth::user()->name))
+          <form action="{{ url('/posts/' . $post->id . '/edit') }}" method="post">
             {{ csrf_field() }}
 
               <button type="submit" name="button" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-edit"></i></button>
           </form><br>
-          <form action="/posts/{{ $post->id }}" method="post">
+          <form action="{{ url('/posts/' . $post->id)}}" method="post">
             {{ csrf_field() }}
               <input type="hidden" name="_method" value="DELETE">
 
               <button type="submit" name="button" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button>
           </form>
-        </div>
       @endif
+      </div>
     </div>
   </div>
   <hr>
@@ -55,7 +55,8 @@
         </ul>
       </div>
     @endif
-    <form class="form-horizontal" action="/posts/{{ $post->id }}/comment" method="POST">
+    <form class="form-horizontal" action="{{ url('/posts/' . $post->id . '/comment') }}" method="post">
+
 
         {{ csrf_field() }}
 
@@ -92,20 +93,20 @@
         </div>
         <div class="col-md-2 line-right">
           <p>{{ $comment->user->name }}</p>
-          <p>{{ Carbon\Carbon::parse($comment->created_at)->format('d-m-Y H u i') }}</p>
+          <p>{{ Carbon\Carbon::parse($comment->created_at)->format('d-m-Y H:i') }}</p>
         </div>
         <div class="col-md-8">
           <p>{{ $comment->body }}</p>
         </div>
         {{-- EDIT & DELETE --}}
         <div class="col-md-1 flex-center">
-          @if (Auth::user()->isAdmin || Auth::check() && $comment->user->name == Auth::user()->name)
-            <form action="/comments/{{ $comment->id }}/edit" method="post">
+          @if (Auth::check() && (Auth::user()->isAdmin || $post->user->name == Auth::user()->name))
+            <form action="{{ url('/comments/' . $comment->id . '/edit') }}" method="post">
               {{ csrf_field() }}
 
                 <button type="submit" name="button" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-edit"></i></button>
             </form><br>
-            <form action="/comments/{{ $comment->id }}" method="post">
+            <form action="{{ url('/comments/' . $comment->id) }}" method="post">
               {{ csrf_field() }}
                 <input type="hidden" name="_method" value="DELETE">
 

@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="stylesheet" href="/css/app.css">
-
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" >
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
@@ -76,7 +75,7 @@
           @yield('content')
     </div>
 
-    <script src="/js/app.js"></script>
+    <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 
     <script>
       jQuery(document).ready(function($) {

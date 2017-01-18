@@ -12,7 +12,9 @@ class CommentsController extends Controller
 {
     public function delete(Comment $comment)
     {
-      $comment->delete();
+      if (Auth::check() && (Auth::user()->isAdmin || $comment->user->name == Auth::user()->name)) {
+        $comment->delete();
+      }
 
       return redirect('/posts/' . $comment->post->id);
     }
@@ -22,7 +24,7 @@ class CommentsController extends Controller
       {
         $post = $comment->post;
         $comments = $post->comments;
-        if (Auth::user()->isAdmin || Auth::check() && $comment->user->name == Auth::user()->name) {
+        if (Auth::check() && (Auth::user()->isAdmin || $comment->user->name == Auth::user()->name)) {
           return view('posts.editComment', compact('post', 'comments','comment'));
         }else{
           return back();
@@ -31,7 +33,10 @@ class CommentsController extends Controller
 
       public function update(Request $request, Comment $comment)
       {
-        $comment->update($request->All());
+        if (Auth::check() && (Auth::user()->isAdmin || $comment->user->name == Auth::user()->name)) {
+          $comment->update($request->All());
+
+        }
 
         return redirect('/posts/' . $comment->post->id);
       }

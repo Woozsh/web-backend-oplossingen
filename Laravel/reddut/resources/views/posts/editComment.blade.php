@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('navbar')
-  <a class="navbar-brand" href="../posts">Terug naar Posts</a>
+  <a class="navbar-brand" href="{{ url('/posts') }}">Terug naar Posts</a>
 
 @endsection
 @section('content')
@@ -20,21 +20,21 @@
       <div class="col-md-9">
         <p>{{ $post->body }}</p>
       </div>
-      @if (Auth::check() && $post->user->name == Auth::user()->name)
-        <div class="col-md-1">
-          <form action="/posts/{{ $post->id }}/edit" method="post">
+      <div class="col-md-1">
+      @if (Auth::user()->isAdmin || Auth::check() && $post->user->name == Auth::user()->name)
+          <form action="{{ url('/posts/' . $post->id . '/edit') }}" method="post">
             {{ csrf_field() }}
 
               <button type="submit" name="button" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-edit"></i></button>
           </form><br>
-          <form action="/posts/{{ $post->id }}" method="post">
+          <form action="{{ url('/posts/' . $post->id)}}" method="post">
             {{ csrf_field() }}
               <input type="hidden" name="_method" value="DELETE">
 
               <button type="submit" name="button" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button>
           </form>
-        </div>
       @endif
+      </div>
     </div>
   </div>
   <hr>
@@ -43,7 +43,7 @@
 
 {{-- EDIT COMMENT --}}
 
-  @if (Auth::check())
+  @if (Auth::user()->isAdmin || Auth::check() && $comment->user->name == Auth::user()->name)
     <h3>Pas je comment aan:</h3>
     @if (count($errors))
       <div class="alert alert-warning alert-dismissable fade in">
@@ -55,7 +55,7 @@
         </ul>
       </div>
     @endif
-    <form class="form-horizontal" action="/comments/{{ $comment->id }}" method="POST">
+    <form class="form-horizontal" action="{{url('/comments' . '/'. $comment->id)}}" method="POST">
       <input type="hidden" name="_method" value="PATCH">
 
         {{ csrf_field() }}
@@ -81,43 +81,43 @@
     </div>
   @endif
 
-{{-- VIEW COMMENTS --}}
+  {{-- VIEW COMMENTS --}}
 
-  <h1>Comments</h1>
+    <h1>Comments</h1>
 
-  @foreach ($comments as $comment)
-    <div class="well well-md">
-      <div class="row">
-        <div class="col-md-1 flex-center">
-          @include('../partials/votes', ['id' => $comment->id, 'score' => $comment->score, 'name' => 'comments'])
-        </div>
-        <div class="col-md-2 line-right">
-          <p>{{ $comment->user->name }}</p>
-          <p>{{ Carbon\Carbon::parse($comment->created_at)->format('d-m-Y H:i:s') }}</p>
+    @foreach ($comments as $comment)
+      <div class="well well-md">
+        <div class="row">
+          <div class="col-md-1 flex-center">
+            @include('../partials/votes', ['id' => $comment->id, 'score' => $comment->score, 'name' => 'comments'])
+          </div>
+          <div class="col-md-2 line-right">
+            <p>{{ $comment->user->name }}</p>
+            <p>{{ Carbon\Carbon::parse($comment->created_at)->format('d-m-Y H u i') }}</p>
+          </div>
+          <div class="col-md-8">
+            <p>{{ $comment->body }}</p>
+          </div>
+          {{-- EDIT & DELETE --}}
+          <div class="col-md-1 flex-center">
+            @if (Auth::user()->isAdmin || Auth::check() && $comment->user->name == Auth::user()->name)
+              <form action="{{ url('/comments/' . $comment->id . '/edit') }}" method="post">
+                {{ csrf_field() }}
 
-        </div>
-        <div class="col-md-8">
-          <p>{{ $comment->body }}</p>
-        </div>
-        <div class="col-md-1 flex-center">
-          @if (Auth::check() && $comment->user->name == Auth::user()->name)
-            <form action="/posts/comment/{{ $comment->id }}/edit" method="post">
-              {{ csrf_field() }}
+                  <button type="submit" name="button" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-edit"></i></button>
+              </form><br>
+              <form action="{{ url('/comments/' . $comment->id) }}" method="post">
+                {{ csrf_field() }}
+                  <input type="hidden" name="_method" value="DELETE">
 
-                <button type="submit" name="button" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-edit"></i></button>
-            </form><br>
-            <form action="/comments/{{ $comment->id }}" method="post">
-              {{ csrf_field() }}
-                <input type="hidden" name="_method" value="DELETE">
-
-                <button type="submit" name="button" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button>
-            </form>
-          @endif
+                  <button type="submit" name="button" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button>
+              </form>
+            @endif
+          </div>
         </div>
       </div>
-    </div>
-  @endforeach
-  <hr>
+    @endforeach
+    <hr>
 
 
 

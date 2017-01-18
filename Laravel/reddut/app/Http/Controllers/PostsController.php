@@ -26,7 +26,7 @@ class PostsController extends Controller
   public function editPost(Post $post)
   {
     $comments = $post->comments;
-    if (Auth::user()->isAdmin || Auth::check() && $post->user->name == Auth::user()->name) {
+    if (Auth::check() && (Auth::user()->isAdmin || $post->user->name == Auth::user()->name)) {
       return view('posts.editPost', compact('post', 'comments'));
     }else{
       return back();
@@ -35,14 +35,18 @@ class PostsController extends Controller
 
   public function update(Request $request, Post $post)
   {
-    $post->update($request->All());
+    if (Auth::check() && (Auth::user()->isAdmin || $post->user->name == Auth::user()->name)) {
+      $post->update($request->All());
+    }
 
     return redirect('/posts/' . $post->id);
   }
 
   public function delete(Post $post)
   {
-    $post->delete();
+    if (Auth::check() && (Auth::user()->isAdmin || $post->user->name == Auth::user()->name)) {
+      $post->delete();
+    }
 
     return redirect('/posts');
   }
