@@ -62,6 +62,7 @@
                                           {{ csrf_field() }}
                                       </form>
                                   </li>
+                                  <li><a href="#">View Profile</a></li>
                               </ul>
                           </li>
                       @endif

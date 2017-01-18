@@ -8,8 +8,12 @@
 
 {{-- POST --}}
 
-  <h2>{{ $post->title }}</h2>
-  <i>{{ $post->user->name }}</i>
+  @if ($post->link !== '')
+    <a href="{{ $post->link }}"><h3>{{ $post->title }}</h3></a>
+  @else
+    <h2>{{ $post->title }}</h2>
+  @endif
+    <i>{{ $post->user->name }}</i>
 
   <hr>
   <div class="well well-lg post">
@@ -45,16 +49,9 @@
 
   @if (Auth::check())
     <h3>Voeg een comment toe:</h3>
-    @if (count($errors))
-      <div class="alert alert-warning alert-dismissable fade in">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <ul>
-          @foreach ($errors->all() as $error)
-            <li>{{ $error}}</li>
-          @endforeach
-        </ul>
-      </div>
-    @endif
+
+    @include('../partials/alerts')
+
     <form class="form-horizontal" action="{{ url('/posts/' . $post->id . '/comment') }}" method="post">
 
 
@@ -85,38 +82,8 @@
 
   <h1>Comments</h1>
 
-  @foreach ($comments as $comment)
-    <div class="well well-md">
-      <div class="row">
-        <div class="col-md-1 flex-center">
-          @include('../partials/votes', ['id' => $comment->id, 'score' => $comment->score, 'name' => 'comments'])
-        </div>
-        <div class="col-md-2 line-right">
-          <p>{{ $comment->user->name }}</p>
-          <p>{{ Carbon\Carbon::parse($comment->created_at)->format('d-m-Y H:i') }}</p>
-        </div>
-        <div class="col-md-8">
-          <p>{{ $comment->body }}</p>
-        </div>
-        {{-- EDIT & DELETE --}}
-        <div class="col-md-1 flex-center">
-          @if (Auth::check() && (Auth::user()->isAdmin || $post->user->name == Auth::user()->name))
-            <form action="{{ url('/comments/' . $comment->id . '/edit') }}" method="post">
-              {{ csrf_field() }}
+  @include('../partials/comments')
 
-                <button type="submit" name="button" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-edit"></i></button>
-            </form><br>
-            <form action="{{ url('/comments/' . $comment->id) }}" method="post">
-              {{ csrf_field() }}
-                <input type="hidden" name="_method" value="DELETE">
-
-                <button type="submit" name="button" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button>
-            </form>
-          @endif
-        </div>
-      </div>
-    </div>
-  @endforeach
   <hr>
 
 

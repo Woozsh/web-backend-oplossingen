@@ -17,9 +17,9 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
             $table->text('title');
-            $table->text('link');
+            $table->string('link')->default('0');
             $table->text('body');
-            $table->integer('score')->default(0);
+            $table->integer('score')->default('');
 
             $table->timestamps();
         });

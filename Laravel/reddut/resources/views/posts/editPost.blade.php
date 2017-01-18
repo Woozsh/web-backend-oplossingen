@@ -20,6 +20,12 @@
               </div>
             </div>
             <div class="form-group">
+              <label class="control-label col-sm-2" for="link">Link:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="link" name="link" placeholder="Enter link if you want" value="{{ $post->link }}">
+              </div>
+            </div>
+            <div class="form-group">
               <label class="control-label col-sm-2" for="body">Body:</label>
               <div class="col-sm-10">
                 <textarea name="body" id="body" class="form-control" >{{ $post->body }}</textarea>
@@ -37,16 +43,7 @@
 
     @if (Auth::check())
       <h3>Voeg een comment toe:</h3>
-      @if (count($errors))
-        <div class="alert alert-warning alert-dismissable fade in">
-          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          <ul>
-            @foreach ($errors->all() as $error)
-              <li>{{ $error}}</li>
-            @endforeach
-          </ul>
-        </div>
-      @endif
+      @include('../partials/alerts')
       <form action="{{ url('/posts/' . $post->id . '/comment') }}" method="post">
 
 
@@ -77,38 +74,7 @@
 
       <h1>Comments</h1>
 
-      @foreach ($comments as $comment)
-        <div class="well well-md">
-          <div class="row">
-            <div class="col-md-1 flex-center">
-              @include('../partials/votes', ['id' => $comment->id, 'score' => $comment->score, 'name' => 'comments'])
-            </div>
-            <div class="col-md-2 line-right">
-              <p>{{ $comment->user->name }}</p>
-              <p>{{ Carbon\Carbon::parse($comment->created_at)->format('d-m-Y H u i') }}</p>
-            </div>
-            <div class="col-md-8">
-              <p>{{ $comment->body }}</p>
-            </div>
-            {{-- EDIT & DELETE --}}
-            <div class="col-md-1 flex-center">
-              @if (Auth::check() && (Auth::user()->isAdmin || $post->user->name == Auth::user()->name))
-                <form action="{{ url('/comments/' . $comment->id . '/edit') }}" method="post">
-                  {{ csrf_field() }}
-
-                    <button type="submit" name="button" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-edit"></i></button>
-                </form><br>
-                <form action="{{ url('/comments/' . $comment->id) }}" method="post">
-                  {{ csrf_field() }}
-                    <input type="hidden" name="_method" value="DELETE">
-
-                    <button type="submit" name="button" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button>
-                </form>
-              @endif
-            </div>
-          </div>
-        </div>
-      @endforeach
+      @include('../partials/comments')
       <hr>
 
 

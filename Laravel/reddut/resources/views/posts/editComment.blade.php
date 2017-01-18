@@ -21,7 +21,7 @@
         <p>{{ $post->body }}</p>
       </div>
       <div class="col-md-1">
-      @if (Auth::user()->isAdmin || Auth::check() && $post->user->name == Auth::user()->name)
+      @if (Auth::user()->isAdmin || Auth::check() && $comment->user->name == Auth::user()->name)
           <form action="{{ url('/posts/' . $post->id . '/edit') }}" method="post">
             {{ csrf_field() }}
 
