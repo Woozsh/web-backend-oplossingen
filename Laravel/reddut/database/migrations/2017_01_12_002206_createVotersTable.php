@@ -18,6 +18,7 @@ class CreateVotersTable extends Migration
             $table->integer('user_id')->unsigned()->index();
             $table->integer('post_id')->unsigned()->index()->default(0);
             $table->integer('comment_id')->unsigned()->index()->default(0);
+            $table->integer('reply_id')->unsigned()->index()->default(0);
             $table->string('vote');
 
             $table->timestamps();

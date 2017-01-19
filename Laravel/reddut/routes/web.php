@@ -50,3 +50,7 @@ Route::delete('comments/{comment}', 'CommentsController@delete');
 //Comment VOTE
 Route::post('comments/{comment}/upvote', 'CommentsController@upvote');
 Route::post('comments/{comment}/downvote', 'CommentsController@downvote');
+
+
+//VOTE
+Route::post('vote/{table}/{vote}', 'CommentsController@vote');

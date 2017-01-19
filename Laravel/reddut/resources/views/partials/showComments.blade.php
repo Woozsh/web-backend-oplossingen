@@ -1,5 +1,6 @@
 @foreach ($comments as $comment)
   <div class="well well-md">
+    {{-- SHOW COMMENT IF PARENT ID = 0--}}
     <div class="row">
       <div class="col-md-1 flex-center">
         @include('../partials/votes', ['id' => $comment->id, 'score' => $comment->score, 'name' => 'comments'])
@@ -28,7 +29,7 @@
         @endif
       </div>
     </div>
-    {{-- REPLY --}}
+    {{-- INSERT REPLY --}}
     <div class="row">
       <div class="col-md-offset-3 col-md-8">
 
@@ -48,13 +49,10 @@
       <div class="col-md-1">
 
       </div>
-    </div>
-    {{-- SHOW REPLIES --}}
-    <div class="row">
-      <div class="col-md-offset-3 col-md-8">
+    </div> {{-- END ROW --}}
 
-      </div>
+    {{-- SHOW REPLIES IF PARENT ID = COMMENT--}}
+    @include('../partials/showReplies')
 
-    </div>
   </div>
 @endforeach

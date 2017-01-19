@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Comment;
+use App\Reply;
 use Auth;
 use DB;
 
