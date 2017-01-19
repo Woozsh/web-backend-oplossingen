@@ -20,26 +20,17 @@
   <div class="well well-lg post">
     <div class="row">
       <div class="col-md-2 flex-center">
+
         @include('../partials/votes', ['id' => $post->id, 'score' => $post->score, 'name' => 'posts'])
+
       </div>
+
       <div class="col-md-9">
         <p>{{ $post->body }}</p>
       </div>
-      <div class="col-md-1">
-      @if (Auth::check() && (Auth::user()->isAdmin || $post->user->name == Auth::user()->name))
-          <form action="{{ url('/posts/' . $post->id . '/edit') }}" method="post">
-            {{ csrf_field() }}
 
-              <button type="submit" name="button" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-edit"></i></button>
-          </form><br>
-          <form action="{{ url('/posts/' . $post->id)}}" method="post">
-            {{ csrf_field() }}
-              <input type="hidden" name="_method" value="DELETE">
+      @include('../partials/showEditDeleteButtons', ['id' => $post->id, 'name' => $post->user->name])
 
-              <button type="submit" name="button" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button>
-          </form>
-      @endif
-      </div>
     </div>
   </div>
   <hr>

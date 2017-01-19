@@ -32,6 +32,8 @@ Route::delete('posts/{post}', 'PostsController@delete');
 Route::post('posts/{post}/upvote', 'PostsController@upvote');
 Route::post('posts/{post}/downvote', 'PostsController@downvote');
 
+
+
 //COMMENT ON POST
 Route::post('posts/{post}/comment', 'PostsController@addComment');
 Route::post('posts', 'PostsController@addPost');
@@ -42,7 +44,6 @@ Route::post('posts/reply/{comment}', 'CommentsController@reply');
 //COMMENT EDIT
 Route::post('comments/{comment}/edit', 'CommentsController@edit');
 Route::patch('comments/{comment}', 'CommentsController@update');
-
 
 //COMMENT DELETE
 Route::delete('comments/{comment}', 'CommentsController@delete');

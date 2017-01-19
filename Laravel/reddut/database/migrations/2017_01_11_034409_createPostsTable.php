@@ -22,6 +22,7 @@ class CreatePostsTable extends Migration
             $table->integer('score')->default();
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

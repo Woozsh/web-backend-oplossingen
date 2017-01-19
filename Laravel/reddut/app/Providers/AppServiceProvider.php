@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Comment;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +14,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Comment::deleting(function($comment){
+          $children = $comment->children;
+          foreach ($children as $child) {
+            $child->delete();
+          }
+        });
     }
 
     /**

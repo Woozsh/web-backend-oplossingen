@@ -3,10 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
+  use SoftDeletes;
+
   protected $fillable = ['title', 'link', 'body', 'score'];
+  protected $dates = ['deleted_at'];
 
   public function comments()
   {
@@ -16,11 +20,6 @@ class Post extends Model
   public function user()
   {
     return $this->belongsTo('App\User');
-  }
-
-  public function replies()
-  {
-    return $this->hasMany('App\Reply');
   }
 
   public function addComment(Comment $comment)

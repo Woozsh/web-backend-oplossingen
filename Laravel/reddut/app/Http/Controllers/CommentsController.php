@@ -5,22 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Comment;
-use App\Reply;
 use Auth;
 use DB;
 
 class CommentsController extends Controller
 {
+    //DELETE
     public function delete(Comment $comment)
     {
       if (Auth::check() && (Auth::user()->isAdmin || $comment->user->name == Auth::user()->name)) {
         $comment->delete();
       }
-
       return redirect('/posts/' . $comment->post->id);
     }
 
-    //edit
+    //EDIT
       public function edit(Comment $comment)
       {
         $post = $comment->post;
@@ -32,6 +31,7 @@ class CommentsController extends Controller
         }
       }
 
+      //UPDATE
       public function update(Request $request, Comment $comment)
       {
         if (Auth::check() && (Auth::user()->isAdmin || $comment->user->name == Auth::user()->name)) {
@@ -42,7 +42,7 @@ class CommentsController extends Controller
         return redirect('/posts/' . $comment->post->id);
       }
 
-      //Reply
+      //REPLY
       public function reply(Request $request, Comment $comment)
       {
         $this->validate($request, [
@@ -51,7 +51,7 @@ class CommentsController extends Controller
 
         if (Auth::check())
         {
-          Auth::user()->replies()->create(['post_id' => $comment->post->id, 'comment_id' => $comment->id, 'body' => $request->input('body')]);
+          Auth::user()->comments()->create(['post_id' => $comment->post->id, 'parent_id' => $comment->id, 'body' => $request->input('body')]);
         }
 
         return redirect('/posts/' . $comment->post->id);

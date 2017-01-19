@@ -19,9 +19,8 @@ class PostsController extends Controller
   public function show(Post $post)
   {
     $comments = $post->comments;
-    $replies = $post->replies;
 
-    return view('posts.show', compact('post', 'comments', 'replies'));
+    return view('posts.show', compact('post', 'comments'));
   }
 
 //edit
@@ -37,7 +36,8 @@ class PostsController extends Controller
 
   public function update(Request $request, Post $post)
   {
-    if (Auth::check() && (Auth::user()->isAdmin || $post->user->name == Auth::user()->name)) {
+    if (Auth::check() && (Auth::user()->isAdmin || $post->user->name == Auth::user()->name))
+    {
       $post->update($request->All());
     }
 
@@ -46,7 +46,8 @@ class PostsController extends Controller
 
   public function delete(Post $post)
   {
-    if (Auth::check() && (Auth::user()->isAdmin || $post->user->name == Auth::user()->name)) {
+    if (Auth::check() && (Auth::user()->isAdmin || $post->user->name == Auth::user()->name))
+    {
       $post->delete();
     }
 

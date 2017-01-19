@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-offset-1 col-md-11">
+  <div class="col-md-offset-2 col-md-10">
       <div class="row">
         <div class="col-md-1 flex-center">
           @include('../partials/votes', ['id' => $reply->id, 'score' => $reply->score, 'name' => 'comments'])
@@ -19,7 +19,7 @@
 </div>
 {{-- INSERT REPLY --}}
 <div class="row">
-  <div class="col-md-offset-4 col-md-7">
+  <div class="col-md-offset-5 col-md-6">
 
     @if (Auth::check())
       <form action="{{ url('/posts/reply/' . $reply->id) }}" method="post">
@@ -39,5 +39,5 @@
   </div>
 </div> {{-- END ROW --}}
 @foreach ($reply->children as $reply)
-  @include('../partials/showReplies2')
+  @include('../partials/showReplies3')
 @endforeach

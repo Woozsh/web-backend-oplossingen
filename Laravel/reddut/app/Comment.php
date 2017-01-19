@@ -3,28 +3,33 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Comment extends Model
 {
-    protected $fillable = ['post_id', 'body', 'score'];
+  use SoftDeletes;
 
-    public function post()
-    {
-      return $this->belongsTo('App\Post');
-    }
+  protected $fillable = ['post_id', 'parent_id', 'body', 'score'];
+  protected $dates = ['deleted_at'];  
 
-    public function user()
-    {
-      return $this->belongsTo('App\User');
-    }
 
-    public function replies()
-    {
-      return $this->hasMany('App\Reply');
-    }
+  public function post()
+  {
+    return $this->belongsTo('App\Post');
+  }
 
-    public function addReply(Reply $reply)
-    {
-      return $this->replies()->save($reply);
-    }
+  public function user()
+  {
+    return $this->belongsTo('App\User');
+  }
+
+  public function parent()
+  {
+      return $this->belongsTo('App\Comment', 'parent_id');
+  }
+
+  public function children()
+  {
+      return $this->hasMany('App\Comment', 'parent_id');
+  }
 }
