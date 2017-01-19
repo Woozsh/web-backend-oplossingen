@@ -29,7 +29,7 @@
         <p>{{ $post->body }}</p>
       </div>
 
-      @include('../partials/showEditDeleteButtons', ['id' => $post->id, 'name' => $post->user->name])
+      @include('../partials/showEditDeleteButtons', ['id' => $post->id, 'name' => $post->user->name, 'link' => 'posts'])
 
     </div>
   </div>
