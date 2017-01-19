@@ -17,4 +17,14 @@ class Comment extends Model
     {
       return $this->belongsTo('App\User');
     }
+
+    public function replies()
+    {
+      return $this->hasMany('App\Reply');
+    }
+
+    public function addReply(Reply $reply)
+    {
+      return $this->replies()->save($reply);
+    }
 }

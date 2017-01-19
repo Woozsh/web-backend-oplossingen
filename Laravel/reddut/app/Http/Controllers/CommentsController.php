@@ -41,6 +41,21 @@ class CommentsController extends Controller
         return redirect('/posts/' . $comment->post->id);
       }
 
+      //Reply
+      public function reply(Request $request, Comment $comment)
+      {
+        $this->validate($request, [
+          'body' => 'required'
+        ]);
+
+        if (Auth::check())
+        {
+          Auth::user()->replies()->create(['post_id' => $comment->post->id, 'comment_id' => $comment->id, 'body' => $request->input('body')]);
+        }
+
+        return redirect('/posts/' . $comment->post->id);
+
+      }
 
     public function upvote(Comment $comment)
     {

@@ -13,6 +13,7 @@
   @else
     <h2>{{ $post->title }}</h2>
   @endif
+
     <i>{{ $post->user->name }}</i>
 
   <hr>
@@ -82,7 +83,7 @@
 
   <h1>Comments</h1>
 
-  @include('../partials/comments')
+  @include('../partials/showComments')
 
   <hr>
 

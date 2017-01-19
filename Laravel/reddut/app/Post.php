@@ -18,6 +18,11 @@ class Post extends Model
     return $this->belongsTo('App\User');
   }
 
+  public function replies()
+  {
+    return $this->hasMany('App\Reply');
+  }
+
   public function addComment(Comment $comment)
   {
     return $this->comments()->save($comment);

@@ -28,5 +28,33 @@
         @endif
       </div>
     </div>
+    {{-- REPLY --}}
+    <div class="row">
+      <div class="col-md-offset-3 col-md-8">
+
+        @if (Auth::check())
+          <form action="{{ url('/posts/' . 'reply/' . $comment->id) }}" method="post">
+              {{ csrf_field() }}
+                <div class="input-group">
+                  <input type="text" class="form-control" id="body" name="body" placeholder="Enter reply on Comment">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">Reply</button>
+                  </span>
+                </div>
+          </form>
+        @endif
+
+      </div>
+      <div class="col-md-1">
+
+      </div>
+    </div>
+    {{-- SHOW REPLIES --}}
+    <div class="row">
+      <div class="col-md-offset-3 col-md-8">
+
+      </div>
+
+    </div>
   </div>
 @endforeach

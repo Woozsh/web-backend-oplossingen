@@ -36,6 +36,9 @@ Route::post('posts/{post}/downvote', 'PostsController@downvote');
 Route::post('posts/{post}/comment', 'PostsController@addComment');
 Route::post('posts', 'PostsController@addPost');
 
+//REPLY ON COMMENT
+Route::post('posts/reply/{comment}', 'CommentsController@reply');
+
 //COMMENT EDIT
 Route::post('comments/{comment}/edit', 'CommentsController@edit');
 Route::patch('comments/{comment}', 'CommentsController@update');

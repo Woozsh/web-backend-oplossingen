@@ -43,7 +43,9 @@
 
     @if (Auth::check())
       <h3>Voeg een comment toe:</h3>
+
       @include('../partials/alerts')
+
       <form action="{{ url('/posts/' . $post->id . '/comment') }}" method="post">
 
 
@@ -74,7 +76,7 @@
 
       <h1>Comments</h1>
 
-      @include('../partials/comments')
+      @include('../partials/showComments')
       <hr>
 
 
