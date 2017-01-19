@@ -12,7 +12,8 @@
           <p>{{ $reply->body }}</p>
         </div>
         {{-- EDIT & DELETE --}}
-        @include('../partials/showEditDeleteButtons', ['id' => $reply->id, 'name' => $reply->user->name])
+        @include('../partials/showEditDeleteButtons', ['id' => $reply->id, 'name' => $reply->user->name, 'link' => 'comments'])
+
 
       </div>
   </div>

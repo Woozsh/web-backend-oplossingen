@@ -75,21 +75,9 @@
             <p>{{ Carbon\Carbon::parse($post->created_at)->format('d-m-Y H:i') }} by <i>{{ $post->user->name}}</i></p>
           </a>
         </div>
-        <div class="col-md-1">
-        @if (Auth::check() && (Auth::user()->isAdmin || $post->user->name == Auth::user()->name))
-            <form action="{{ url('/posts/' . $post->id . '/edit') }}" method="post">
-              {{ csrf_field() }}
 
-                <button type="submit" name="button" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-edit"></i></button>
-            </form><br>
-            <form action="{{ url('/posts/' . $post->id)}}" method="post">
-              {{ csrf_field() }}
-                <input type="hidden" name="_method" value="DELETE">
+        @include('../partials/showEditDeleteButtons', ['id' => $post->id, 'name' => $post->user->name, 'link' => 'posts'])
 
-                <button type="submit" name="button" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button>
-            </form>
-        @endif
-      </div>
       </div>
     </div>
 
