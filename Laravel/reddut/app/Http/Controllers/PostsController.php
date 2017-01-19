@@ -12,8 +12,9 @@ class PostsController extends Controller
 {
   public function index()
   {
-    $posts = Post::orderBy('score', 'DESC')->get();
-    return view('posts.index', compact('posts'));
+    $posts = Post::where('isSticky', 0)->orderBy('score', 'DESC')->get();
+    $sticky = Post::where('isSticky', 1)->orderBy('id', 'DESC')->first();
+    return view('posts.index', compact('posts', 'sticky'));
   }
 
   public function show(Post $post)
