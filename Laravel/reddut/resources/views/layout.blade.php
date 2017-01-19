@@ -74,7 +74,14 @@
 
 
           @yield('content')
+          <footer>
+            <p>reddut &copy</p>
+            <p>Made by Jordy Pereira</p>
+            <p>School project</p>
+          </footer>
     </div>
+
+
 
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 
