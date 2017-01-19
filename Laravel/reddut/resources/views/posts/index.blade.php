@@ -54,7 +54,35 @@
     </div>
   @endif
 
+<hr>
+{{-- STICKY --}}
+@if ($sticky)
+  <div class="well sticky">
+    <div class="row">
+      <div class="col-md-2 flex-center">
+        @include('../partials/votes', ['id' => $sticky->id, 'score' => $sticky->score, 'name' => 'posts'])
+      </div>
+      <div class="col-md-9">
+        @if ($sticky->link != '' )
+          <a href="{{ $sticky->link }}"><h3>{{ $sticky->title }}</h3></a>
+        @else
+          <h3>{{ $sticky->title }}</h3>
+        @endif
+        <a class="post" href="{{ url('/posts/' . $sticky->id) }}">
+          <p>reacties: {{ count($sticky->comments) }}</p>
+          <p>{{ Carbon\Carbon::parse($sticky->created_at)->format('d-m-Y H:i') }} by <i>{{ $sticky->user->name}}</i></p>
+        </a>
+      </div>
 
+      @include('../partials/showEditDeleteButtonsPost', ['id' => $sticky->id, 'name' => $sticky->user->name])
+
+
+    </div>
+  </div>
+@endif
+
+
+{{-- POSTS --}}
 
   <h1>Alle Posts</h1>
   <p><a href="#">Sort by popularity</a> | <a href="#">Sort by date</a></p>
@@ -76,7 +104,7 @@
           </a>
         </div>
 
-        @include('../partials/showEditDeleteButtons', ['id' => $post->id, 'name' => $post->user->name, 'link' => 'posts'])
+        @include('../partials/showEditDeleteButtonsPost', ['id' => $post->id, 'name' => $post->user->name])
 
       </div>
     </div>

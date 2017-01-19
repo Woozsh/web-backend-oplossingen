@@ -7709,6 +7709,11 @@ a.post:hover {
   background-color: #fff;
 }
 
+.sticky {
+  background-color: #fff;
+  border-color: #F7CA18;
+}
+
 .flex-center {
   display: -webkit-box;
   display: flex;

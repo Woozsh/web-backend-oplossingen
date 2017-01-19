@@ -9,7 +9,7 @@ class Post extends Model
 {
   use SoftDeletes;
 
-  protected $fillable = ['title', 'link', 'body', 'score'];
+  protected $fillable = ['title', 'link', 'body', 'score','stickyTime'];
   protected $dates = ['deleted_at'];
 
   public function comments()

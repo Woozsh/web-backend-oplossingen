@@ -12,8 +12,9 @@ class PostsController extends Controller
 {
   public function index()
   {
-    $posts = Post::orderBy('score', 'DESC')->get();
-    return view('posts.index', compact('posts'));
+    $posts = Post::where('stickyTime', null)->orderBy('score', 'DESC')->get();
+    $sticky = Post::whereNotNull('stickyTime')->orderBy('stickyTime', 'DESC')->first();
+    return view('posts.index', compact('posts', 'sticky'));
   }
 
   public function show(Post $post)
@@ -42,6 +43,22 @@ class PostsController extends Controller
     }
 
     return redirect('/posts/' . $post->id);
+  }
+
+  public function sticky(Request $request, Post $post)
+  {
+    if (Auth::check() && Auth::user()->isAdmin)
+    {
+      if ($post->stickyTime == null) {
+        $post->stickyTime = date('Y-m-d H:i:s');
+      }
+      else {
+        $post->stickyTime = null;
+      }
+      $post->save();
+    }
+
+    return back();
   }
 
   public function delete(Post $post)

@@ -25,6 +25,9 @@ Route::get('posts/{post}', 'PostsController@show');
 Route::post('posts/{post}/edit', 'PostsController@editPost');
 Route::patch('posts/{post}', 'PostsController@update');
 
+//POST STICKY
+Route::post('posts/{post}/sticky', 'PostsController@sticky');
+
 //POST DELETE
 Route::delete('posts/{post}', 'PostsController@delete');
 

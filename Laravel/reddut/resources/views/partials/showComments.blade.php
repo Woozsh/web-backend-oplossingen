@@ -17,7 +17,6 @@
         </div>
 
         {{-- EDIT & DELETE --}}
-        @include('../partials/showEditDeleteButtons', ['id' => $comment->id, 'name' => $comment->user->name])
         @include('../partials/showEditDeleteButtons', ['id' => $comment->id, 'name' => $comment->user->name, 'link' => 'comments'])
 
 
