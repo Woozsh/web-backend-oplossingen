@@ -74,7 +74,8 @@
         </a>
       </div>
 
-      @include('../partials/showEditDeleteButtons', ['id' => $sticky->id, 'name' => $sticky->user->name, 'link' => 'posts'])
+      @include('../partials/showEditDeleteButtonsPost', ['id' => $sticky->id, 'name' => $sticky->user->name])
+
 
     </div>
   </div>
@@ -103,7 +104,7 @@
           </a>
         </div>
 
-        @include('../partials/showEditDeleteButtons', ['id' => $post->id, 'name' => $post->user->name, 'link' => 'posts'])
+        @include('../partials/showEditDeleteButtonsPost', ['id' => $post->id, 'name' => $post->user->name])
 
       </div>
     </div>
