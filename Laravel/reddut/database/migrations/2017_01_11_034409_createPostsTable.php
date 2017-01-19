@@ -19,7 +19,7 @@ class CreatePostsTable extends Migration
             $table->text('title');
             $table->string('link')->default('0');
             $table->text('body');
-            $table->integer('score')->default();
+            $table->integer('score')->default(0);
 
             $table->timestamps();
             $table->softDeletes();
