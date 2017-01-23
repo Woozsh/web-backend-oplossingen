@@ -17,6 +17,8 @@ Auth::routes();
 
 Route::get('/', 'PostsController@index');
 
+//ABOUT
+Route::get('about', 'HomeController@about');
 //POSTS
 Route::get('posts', 'PostsController@index');
 Route::get('posts/{post}', 'PostsController@show');

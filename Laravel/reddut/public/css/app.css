@@ -7709,6 +7709,10 @@ a.post:hover {
   background-color: #fff;
 }
 
+.body {
+  min-height: 80vh;
+}
+
 .sticky {
   background-color: #fff;
   border-color: #F7CA18;
@@ -7749,6 +7753,33 @@ a.post:hover {
   outline: none;
   border: 0;
   background: transparent;
+}
+
+footer {
+  background-color: #fff;
+  border-top: 1px solid #d3e0e9;
+}
+
+footer .container {
+  min-height: 120px;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-direction: row;
+  flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+footer .container:before, footer .container:after {
+  content: none;
+}
+
+footer .container .column {
+  padding: 10px 10px 0px 5px;
 }
 
 /*# sourceMappingURL=app.css.map */

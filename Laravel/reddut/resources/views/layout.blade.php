@@ -70,17 +70,32 @@
               </div>
           </div>
       </nav>
-    <div class="container">
+    <div class="body container">
 
 
           @yield('content')
-          <footer>
-            <p>reddut &copy</p>
-            <p>Made by Jordy Pereira</p>
-            <p>School project</p>
-          </footer>
-    </div>
 
+    </div>
+    <footer>
+      <div class="container">
+        <div class="column">
+          <p><a href="/about/">About</a></p>
+          <p><a href="suggestion">Give a suggestion</a></p>
+          <p><a href="contact">Contact</a></p>
+        </div>
+        <div class="column">
+          <p><a href="https://www.facebook.com/JordyPe" target='_blank'>Facebook</a></p>
+          <p><a href="https://github.com/Woozsh" target='_blank'>Github</a></p>
+          <p><a href="https://twitter.com/viperwooz" target='_blank'>Twitter</a></p>
+        </div>
+        <div class="column">
+          <p>Reddut &copy</p>
+          <p>Made by Jordy Pereira</p>
+          <p>School project</p>
+        </div>
+      </div>
+
+    </footer>
 
 
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
