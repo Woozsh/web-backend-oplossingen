@@ -13,8 +13,8 @@ class PostsController extends Controller
   public function index()
   {
     $posts = Post::where('stickyTime', null)->orderBy('score', 'DESC')->get();
-    $sticky = Post::whereNotNull('stickyTime')->orderBy('stickyTime', 'DESC')->first();
-    return view('posts.index', compact('posts', 'sticky'));
+    $stickies = Post::whereNotNull('stickyTime')->orderBy('stickyTime', 'DESC')->get();
+    return view('posts.index', compact('posts', 'stickies'));
   }
 
   public function show(Post $post)

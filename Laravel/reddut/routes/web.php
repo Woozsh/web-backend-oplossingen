@@ -17,8 +17,11 @@ Auth::routes();
 
 Route::get('/', 'PostsController@index');
 
-//ABOUT
+//Home
 Route::get('about', 'HomeController@about');
+Route::get('suggestions', 'HomeController@suggestions');
+Route::get('contact', 'HomeController@contact');
+
 //POSTS
 Route::get('posts', 'PostsController@index');
 Route::get('posts/{post}', 'PostsController@show');

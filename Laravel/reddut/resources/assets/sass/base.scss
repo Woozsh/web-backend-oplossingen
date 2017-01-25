@@ -1,5 +1,5 @@
 .body{
-  min-height: 80vh;
+  min-height: calc(100vh - (50px + 1px + 22px) - (120px + 1px));
 }
 
 .sticky{

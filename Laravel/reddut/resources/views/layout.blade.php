@@ -10,7 +10,7 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
-    <title>@yield('title')</title>
+    <title>@yield('title') - Reddut</title>
   </head>
   <body>
       <nav class="navbar navbar-default navbar-static-top">
@@ -79,9 +79,9 @@
     <footer>
       <div class="container">
         <div class="column">
-          <p><a href="/about/">About</a></p>
-          <p><a href="suggestion">Give a suggestion</a></p>
-          <p><a href="contact">Contact</a></p>
+          <p><a href="{{ url('/about/') }}">About & Features</a></p>
+          <p><a href="{{ url('/suggestions/') }}">Give a suggestion</a></p>
+          <p><a href="{{ url('/contact/') }}">Contact</a></p>
         </div>
         <div class="column">
           <p><a href="https://www.facebook.com/JordyPe" target='_blank'>Facebook</a></p>
