@@ -7,7 +7,8 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-<p> This App online: [Reddut](http://hcbrabo.be/reddut/public) </p>
+<p> This App online: 
+</p>[Reddut](http://hcbrabo.be/reddut/public) 
 
 ## About Laravel
 
