@@ -13,10 +13,20 @@ class PostsController extends Controller
   public function index()
   {
     $posts = Post::where('stickyTime', null)->orderBy('score', 'DESC')->get();
+
     $stickies = Post::whereNotNull('stickyTime')->orderBy('stickyTime', 'DESC')->get();
+
     return view('posts.index', compact('posts', 'stickies'));
   }
 
+  public function sortIndex($sort)
+  {
+    $posts = Post::where('stickyTime', null)->orderBy($sort, 'DESC')->get();
+
+    $stickies = Post::whereNotNull('stickyTime')->orderBy('stickyTime', 'DESC')->get();
+
+    return view('posts.index', compact('posts', 'stickies'));
+  }
   public function show(Post $post)
   {
     $comments = $post->comments;
@@ -37,12 +47,16 @@ class PostsController extends Controller
 
   public function update(Request $request, Post $post)
   {
+
+
     if (Auth::check() && (Auth::user()->isAdmin || $post->user->name == Auth::user()->name))
     {
+
       $post->update($request->All());
+      return redirect('/posts/' . $post->id);
     }
 
-    return redirect('/posts/' . $post->id);
+    return back();
   }
 
   public function sticky(Request $request, Post $post)

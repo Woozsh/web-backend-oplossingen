@@ -89,9 +89,9 @@
           <p><a href="https://twitter.com/viperwooz" target='_blank'>Twitter</a></p>
         </div>
         <div class="column">
-          <p>Reddut &copy</p>
           <p>Made by Jordy Pereira</p>
           <p>School project</p>
+          <p>Reddut &copy</p>
         </div>
       </div>
 

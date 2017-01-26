@@ -1,5 +1,9 @@
 @extends('layout')
 
+@section('title')
+  {{ $post->title }}
+@endsection
+
 @section('navbar')
   <a class="navbar-brand" href="{{ url('/posts') }}">Terug naar Posts</a>
 

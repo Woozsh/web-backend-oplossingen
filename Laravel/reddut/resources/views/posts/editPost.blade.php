@@ -9,6 +9,8 @@
   <i>{{ $post->user->name }}</i>
 
   <hr>
+  @include('../partials/alerts')
+  
   <div class="well well-lg">
         <form class="form-horizontal" action="{{ url('/posts/' . $post->id) }}" method="post">
             {{ csrf_field() }}
@@ -38,39 +40,6 @@
             </div>
         </form>
   </div>
-
-  {{-- PLACE COMMENT --}}
-
-    @if (Auth::check())
-      <h3>Voeg een comment toe:</h3>
-
-      @include('../partials/alerts')
-
-      <form action="{{ url('/posts/' . $post->id . '/comment') }}" method="post">
-
-
-          {{ csrf_field() }}
-
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="body">Comment:</label>
-          <div class="col-sm-10">
-            <textarea name="body" class="form-control" placeholder="Enter comment">{{ old('body') }}</textarea>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">Add Comment</button>
-          </div>
-        </div>
-
-      </form>
-      <hr>
-    @else
-      <div class="alert alert-warning">
-        Make an account or log in to post a comment.
-      </div>
-    @endif
 
     {{-- VIEW COMMENTS --}}
 

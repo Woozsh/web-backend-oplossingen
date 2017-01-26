@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title')
-  Reddut - Posts
+  Contact
 @endsection
 
 @section('content')

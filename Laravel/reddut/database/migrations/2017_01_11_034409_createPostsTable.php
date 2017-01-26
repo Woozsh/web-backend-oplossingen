@@ -20,12 +20,7 @@ class CreatePostsTable extends Migration
             $table->string('link')->default();
             $table->text('body');
             $table->integer('score')->default(0);
-<<<<<<< HEAD
-=======
             $table->datetime('stickyTime')->nullable();
-
->>>>>>> pinned
-
             $table->timestamps();
             $table->softDeletes();
         });

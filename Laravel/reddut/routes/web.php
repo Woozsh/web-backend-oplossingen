@@ -24,6 +24,8 @@ Route::get('contact', 'HomeController@contact');
 
 //POSTS
 Route::get('posts', 'PostsController@index');
+Route::get('posts/sort/{sort}', 'PostsController@sortIndex');
+Route::get('posts', 'PostsController@index');
 Route::get('posts/{post}', 'PostsController@show');
 
 //POST EDIT

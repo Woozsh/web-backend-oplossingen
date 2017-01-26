@@ -1,23 +1,15 @@
 @extends('layout')
 
 @section('title')
-  Reddut - Posts
+  Posts
 @endsection
 
 @section('content')
   @if (Auth::check())
     <h1>Start een nieuwe post</h1>
 
-    @if (count($errors))
-      <div class="alert alert-warning alert-dismissable fade in">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <ul>
-          @foreach ($errors->all() as $error)
-            <li>{{ $error}}</li>
-          @endforeach
-        </ul>
-      </div>
-    @endif
+    @include('../partials/alerts')
+
 
 {{-- MAKE POST --}}
       <form class="form-horizontal" action="posts" method="POST">
@@ -88,7 +80,7 @@
 {{-- POSTS --}}
 
   <h1>Alle Posts</h1>
-  <p><a href="#">Sort by popularity</a> | <a href="#">Sort by date</a></p>
+  <p><a href="{{ url('/posts/sort/score') }}">Sort by popularity</a> | <a href="{{ url('/posts/sort/created_at') }}">Sort by date</a></p>
   @foreach ($posts as $post)
     <div class="well post">
       <div class="row">
